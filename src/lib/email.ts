@@ -1,6 +1,11 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === "your_resend_api_key") {
+    return null;
+  }
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 interface BookingEmailData {
   bookingId: string;
@@ -14,6 +19,9 @@ interface BookingEmailData {
 }
 
 export async function sendAdminNotification(data: BookingEmailData) {
+  const resend = getResend();
+  if (!resend) return;
+
   const confirmUrl = `${process.env.NEXTAUTH_URL}/api/bookings/${data.bookingId}`;
 
   await resend.emails.send({
@@ -47,6 +55,9 @@ export async function sendAdminNotification(data: BookingEmailData) {
 }
 
 export async function sendClientConfirmation(data: BookingEmailData) {
+  const resend = getResend();
+  if (!resend) return;
+
   await resend.emails.send({
     from: "SkinLab 011 <noreply@skinlab011.com>",
     to: data.clientEmail,
@@ -82,6 +93,9 @@ export async function sendBookingStatusEmail(
   time: string,
   status: "confirmed" | "rejected"
 ) {
+  const resend = getResend();
+  if (!resend) return;
+
   const isConfirmed = status === "confirmed";
 
   await resend.emails.send({
