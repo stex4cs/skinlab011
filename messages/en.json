@@ -1,0 +1,216 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "pricing": "Pricing",
+    "booking": "Booking",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "gallery": "Gallery",
+    "about": "About Us"
+  },
+  "hero": {
+    "title": "SKINLAB 011",
+    "subtitle": "Your path to perfect skin",
+    "cta": "BOOK A TREATMENT"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Professional treatments for your beauty and wellbeing",
+    "items": {
+      "facial": { "title": "Facial Treatments", "description": "Deep cleansing, hydration, anti-aging treatments and personalized care for radiant skin." },
+      "body": { "title": "Body Treatments", "description": "Pressotherapy, RF treatments and cavitation for body contouring and skin tightening." },
+      "massage": { "title": "Massages", "description": "Relaxation, therapeutic and anti-cellulite massages for complete relaxation and body regeneration." },
+      "waxCold": { "title": "Cold Wax Hair Removal", "description": "Professional cold wax hair removal for smooth and silky skin." },
+      "waxSugar": { "title": "Sugar Paste Hair Removal", "description": "Natural and gentle sugar paste hair removal for sensitive skin." },
+      "laser": { "title": "Laser Hair Removal", "description": "Permanent removal of unwanted hair with the latest laser technology." },
+      "nails": { "title": "Manicure & Pedicure", "description": "Complete nail care with gel polish, spa treatments and nail art." },
+      "brows": { "title": "Brows & Lashes", "description": "Shaping, lamination, lifting and tinting for a perfect look." }
+    }
+  },
+  "pricing": {
+    "title": "Pricing",
+    "subtitle": "Transparent prices for all our services"
+  },
+  "about": {
+    "title": "About Us",
+    "storyTitle": "Our Story",
+    "storyP1": "SkinLab 011 is a modern beauty salon located in the heart of Podgorica. Our mission is to provide you with premium treatments using state-of-the-art equipment and premium cosmetic products.",
+    "storyP2": "With a team of certified professionals and an individualized approach to each client, we are dedicated to helping you feel and look your best.",
+    "stats": {
+      "year": "2025",
+      "yearLabel": "Year founded",
+      "clients": "500+",
+      "clientsLabel": "Satisfied clients",
+      "treatments": "15+",
+      "treatmentsLabel": "Premium treatments"
+    },
+    "owner": {
+      "name": "Neda Vukobrat",
+      "title": "Founder & Owner",
+      "bio": "With over 10 years of experience in the cosmetics industry, Neda is dedicated to providing premium treatments and personalized care. Certified dermato-cosmetician with international certifications.",
+      "credentials": {
+        "cert": "Certified dermato-cosmetician",
+        "spec": "Specialization: Laser treatments",
+        "exp": "10+ years of experience",
+        "intl": "International certifications"
+      }
+    },
+    "values": {
+      "title": "Our Values",
+      "quality": { "title": "Quality", "icon": "💎" },
+      "trust": { "title": "Trust", "icon": "🤝" },
+      "expertise": { "title": "Expertise", "icon": "🌟" },
+      "personal": { "title": "Personal Approach", "icon": "💖" }
+    }
+  },
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "subtitle": "Trust and satisfaction of our clients is our greatest reward",
+    "items": [
+      { "name": "SARA LUNCIĆ", "text": "I did my makeup, hair and nails. All the girls are excellent. Best salon in the area." },
+      { "name": "ALEKSANDRA DEBELJAČKI", "text": "The girls do excellent work on nails and hair. I've been coming to them for years and truly never had a bad experience." },
+      { "name": "VALENTINA ASANOVIĆ", "text": "I'm extremely satisfied with the facial treatment. My skin looks incredible after just one treatment. Highly recommend!" }
+    ]
+  },
+  "gallery": {
+    "title": "Our Work",
+    "subtitle": "Results that speak for themselves",
+    "filters": {
+      "all": "All",
+      "facial": "Facial Treatments",
+      "body": "Body Treatments",
+      "nails": "Manicure & Pedicure",
+      "brows": "Brows & Lashes",
+      "laser": "Laser Hair Removal"
+    },
+    "beforeAfter": "Before & After",
+    "portfolio": "Portfolio",
+    "instagram": {
+      "title": "Follow Us on Instagram",
+      "handle": "@skinlab011",
+      "button": "Follow Us on Instagram"
+    },
+    "before": "BEFORE",
+    "after": "AFTER"
+  },
+  "booking": {
+    "title": "Book a Treatment",
+    "subtitle": "Fill out the form and we'll respond as soon as possible",
+    "whyTitle": "Why book with us?",
+    "reasons": {
+      "fast": { "icon": "⚡", "title": "Quick Confirmation", "desc": "We respond to all requests within 24 hours" },
+      "premium": { "icon": "💎", "title": "Premium Equipment", "desc": "We use state-of-the-art equipment and products" },
+      "expert": { "icon": "🌟", "title": "Expert Team", "desc": "Certified professionals with years of experience" },
+      "personal": { "icon": "🎯", "title": "Personal Approach", "desc": "Every treatment is tailored to your needs" }
+    },
+    "form": {
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "treatment": "Select Treatment",
+      "date": "Preferred Date",
+      "time": "Preferred Time",
+      "message": "Additional Note (optional)",
+      "submit": "Send Request",
+      "submitting": "Sending...",
+      "success": "Request sent successfully! We'll respond as soon as possible.",
+      "error": "An error occurred. Please try again."
+    },
+    "calendar": {
+      "title": "Select Appointment",
+      "selectTreatment": "First select a treatment",
+      "selectDate": "Select a date",
+      "selectTime": "Select a time",
+      "available": "Available",
+      "booked": "Booked",
+      "confirm": "Confirm Booking",
+      "closed": "Closed"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to the most common questions",
+    "items": [
+      { "q": "How long does a facial treatment last?", "a": "The average duration of a facial treatment is 60-90 minutes, depending on the type of treatment. Deep cleansing usually takes about 75 minutes, while hydration treatments take about 60 minutes." },
+      { "q": "Does laser hair removal hurt?", "a": "Laser hair removal can cause a mild sensation of discomfort, similar to a rubber band snapping against the skin. Our devices have a built-in cooling system that significantly reduces discomfort." },
+      { "q": "How many laser hair removal treatments are needed?", "a": "For optimal results, we recommend 6-8 treatments at intervals of 4-6 weeks. The number of treatments depends on the body area and skin type." },
+      { "q": "How should I prepare for a treatment?", "a": "We recommend coming with clean skin without makeup for facial treatments. For laser hair removal, avoid sun exposure 2 weeks before the treatment." },
+      { "q": "What is the cancellation policy?", "a": "Please cancel or reschedule your appointment at least 24 hours in advance. Late cancellations or no-shows may result in a charge of 50% of the treatment price." },
+      { "q": "Can I come without an appointment?", "a": "We recommend booking in advance to guarantee your appointment. However, if we have an available slot, we'll be happy to accommodate you." },
+      { "q": "What products do you use?", "a": "We use premium professional cosmetic lines from renowned world brands. All products are dermatologically tested and suitable for different skin types." },
+      { "q": "Do you offer discounted packages?", "a": "Yes! We offer various treatment packages with significant discounts. Check our price list for package details or contact us for a personalized offer." },
+      { "q": "What payment methods do you accept?", "a": "We accept cash, cards (Visa, Mastercard) and bank transfer. For treatment packages, we offer installment payment options." },
+      { "q": "Is there parking available?", "a": "Yes, there is public parking in the immediate vicinity of the salon. The salon is also well-connected by public transport - bus lines 3, 6, 11 and 19." }
+    ]
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We're happy to answer all your questions",
+    "location": "Our Location",
+    "address": "Bulevar Svetog Petra Cetinjskog, Podgorica",
+    "parking": "Public parking available nearby",
+    "transport": "Bus lines 3, 6, 11 and 19",
+    "info": {
+      "addressTitle": "Address",
+      "phoneTitle": "Phone",
+      "emailTitle": "Email",
+      "phone": "+382 XX XXX XXX",
+      "hours": "Mon-Fri: 09:00-20:00, Sat: 09:00-15:00",
+      "email": "info@skinlab011.com",
+      "response": "We respond within 24 hours"
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "poweredBy": "Powered by"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "bookings": "Bookings",
+    "prices": "Pricing",
+    "settings": "Settings",
+    "logout": "Log Out",
+    "login": "Sign in with Google",
+    "loginTitle": "Admin Panel",
+    "loginSubtitle": "Sign in to access the admin panel",
+    "recentBookings": "Recent Bookings",
+    "todayBookings": "Today",
+    "pendingBookings": "Pending",
+    "totalBookings": "Total",
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled"
+    },
+    "actions": {
+      "confirm": "Confirm",
+      "reject": "Reject",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "save": "Save",
+      "delete": "Delete",
+      "add": "Add"
+    },
+    "priceEditor": {
+      "title": "Price Management",
+      "nameME": "Name (ME)",
+      "nameEN": "Name (EN)",
+      "nameRU": "Name (RU)",
+      "price": "Price",
+      "duration": "Duration (min)",
+      "active": "Active",
+      "addTreatment": "Add Treatment",
+      "saved": "Changes saved!"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "noResults": "No results",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "required": "Required field"
+  }
+}

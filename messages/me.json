@@ -1,0 +1,216 @@
+{
+  "nav": {
+    "home": "Početna",
+    "services": "Usluge",
+    "pricing": "Cjenovnik",
+    "booking": "Zakazivanje",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "gallery": "Galerija",
+    "about": "O nama"
+  },
+  "hero": {
+    "title": "SKINLAB 011",
+    "subtitle": "Vaš put do savršene kože",
+    "cta": "ZAKAŽITE TRETMAN"
+  },
+  "services": {
+    "title": "Naše usluge",
+    "subtitle": "Profesionalni tretmani za vašu ljepotu i wellbeing",
+    "items": {
+      "facial": { "title": "Tretmani lica", "description": "Dubinsko čišćenje, hidratacija, anti-age tretmani i personalizovana njega za blistavu kožu." },
+      "body": { "title": "Tretmani tijela", "description": "Presoterapija, RF tretmani i kavitacija za modeliranje figure i zatezanje kože." },
+      "massage": { "title": "Masaže", "description": "Relax, terapeutske i anticelulit masaže za potpuno opuštanje i regeneraciju tijela." },
+      "waxCold": { "title": "Depilacija voskom", "description": "Profesionalna depilacija hladnim voskom za glatku i svilenkastu kožu." },
+      "waxSugar": { "title": "Depilacija šećernom pastom", "description": "Prirodna i nježna depilacija šećernom pastom za osjetljivu kožu." },
+      "laser": { "title": "Laserska epilacija", "description": "Trajno uklanjanje neželjenih dlačica najsavremenijom laserskom tehnologijom." },
+      "nails": { "title": "Manikir & Pedikir", "description": "Kompletna njega noktiju sa gel lakom, spa tretmanima i ukrašavanjem." },
+      "brows": { "title": "Obrve & Trepavice", "description": "Oblikovanje, laminacija, lifting i bojenje za savršen pogled." }
+    }
+  },
+  "pricing": {
+    "title": "Cjenovnik",
+    "subtitle": "Transparentne cijene za sve naše usluge"
+  },
+  "about": {
+    "title": "O nama",
+    "storyTitle": "Naša priča",
+    "storyP1": "SkinLab 011 je moderni kozmetički salon smješten u srcu Podgorice. Naša misija je pružiti vam vrhunske tretmane koristeći najsavremeniju opremu i premium kozmetičke preparate.",
+    "storyP2": "Sa timom certificiranih stručnjaka i individualiziranim pristupom svakom klijentu, posvećeni smo tome da vam pomognemo da se osjećate i izgledate najbolje moguće.",
+    "stats": {
+      "year": "2025",
+      "yearLabel": "Godina osnivanja",
+      "clients": "500+",
+      "clientsLabel": "Zadovoljnih klijenata",
+      "treatments": "15+",
+      "treatmentsLabel": "Premium tretmana"
+    },
+    "owner": {
+      "name": "Neda Vukobrat",
+      "title": "Osnivač i vlasnica",
+      "bio": "Sa preko 10 godina iskustva u kozmetičkoj industriji, Neda je posvećena pružanju vrhunskih tretmana i personalizovane njege. Certificirana dermato-kozmetičarka sa međunarodnim certifikacijama.",
+      "credentials": {
+        "cert": "Certificirana dermato-kozmetičarka",
+        "spec": "Specijalizacija: Laserski tretmani",
+        "exp": "10+ godina iskustva",
+        "intl": "Međunarodne certifikacije"
+      }
+    },
+    "values": {
+      "title": "Naše vrijednosti",
+      "quality": { "title": "Kvalitet", "icon": "💎" },
+      "trust": { "title": "Povjerenje", "icon": "🤝" },
+      "expertise": { "title": "Stručnost", "icon": "🌟" },
+      "personal": { "title": "Individualan pristup", "icon": "💖" }
+    }
+  },
+  "testimonials": {
+    "title": "Šta kažu naši klijenti",
+    "subtitle": "Povjerenje i zadovoljstvo naših klijenata je naša najveća nagrada",
+    "items": [
+      { "name": "SARA LUNCIĆ", "text": "Radila sam šminku, frizuru i nokte. Sve devojke su odlične. Najbolji salon u kraju." },
+      { "name": "ALEKSANDRA DEBELJAČKI", "text": "Odlično devojke rade nokte, frizure. Godinama dolazim kod njih i zaista nikada nijedno loše iskustvo." },
+      { "name": "VALENTINA ASANOVIĆ", "text": "Prezadovoljna sam tretmanom lica. Koža mi izgleda nevjerovatno nakon samo jednog tretmana. Toplo preporučujem!" }
+    ]
+  },
+  "gallery": {
+    "title": "Naši radovi",
+    "subtitle": "Rezultati koji govore sami za sebe",
+    "filters": {
+      "all": "Sve",
+      "facial": "Tretmani lica",
+      "body": "Tretmani tijela",
+      "nails": "Manikir & Pedikir",
+      "brows": "Obrve & Trepavice",
+      "laser": "Laserska epilacija"
+    },
+    "beforeAfter": "Before & After",
+    "portfolio": "Portfolio",
+    "instagram": {
+      "title": "Pratite nas na Instagramu",
+      "handle": "@skinlab011",
+      "button": "Pratite nas na Instagramu"
+    },
+    "before": "PRIJE",
+    "after": "POSLIJE"
+  },
+  "booking": {
+    "title": "Zakažite tretman",
+    "subtitle": "Popunite formu i odgovorićemo vam u najkraćem roku",
+    "whyTitle": "Zašto zakazati kod nas?",
+    "reasons": {
+      "fast": { "icon": "⚡", "title": "Brza potvrda", "desc": "Odgovaramo na sve zahtjeve u roku od 24 sata" },
+      "premium": { "icon": "💎", "title": "Premium oprema", "desc": "Koristimo najsavremeniju opremu i preparate" },
+      "expert": { "icon": "🌟", "title": "Stručan tim", "desc": "Certificirani profesionalci sa dugogodišnjim iskustvom" },
+      "personal": { "icon": "🎯", "title": "Individualan pristup", "desc": "Svaki tretman prilagođavamo vašim potrebama" }
+    },
+    "form": {
+      "name": "Ime i prezime",
+      "email": "Email",
+      "phone": "Telefon",
+      "treatment": "Izaberite tretman",
+      "date": "Željeni datum",
+      "time": "Željeno vrijeme",
+      "message": "Dodatna napomena (opciono)",
+      "submit": "Pošalji zahtjev",
+      "submitting": "Šaljem...",
+      "success": "Zahtjev je uspješno poslat! Odgovorićemo vam u najkraćem roku.",
+      "error": "Došlo je do greške. Molimo pokušajte ponovo."
+    },
+    "calendar": {
+      "title": "Izaberite termin",
+      "selectTreatment": "Prvo izaberite tretman",
+      "selectDate": "Izaberite datum",
+      "selectTime": "Izaberite vrijeme",
+      "available": "Dostupno",
+      "booked": "Zauzeto",
+      "confirm": "Potvrdite rezervaciju",
+      "closed": "Zatvoreno"
+    }
+  },
+  "faq": {
+    "title": "Često postavljana pitanja",
+    "subtitle": "Odgovori na pitanja koja nas najčešće postavljaju",
+    "items": [
+      { "q": "Koliko traje tretman lica?", "a": "Prosječno trajanje tretmana lica je 60-90 minuta, zavisno od vrste tretmana. Dubinsko čišćenje obično traje oko 75 minuta, dok hidratacijski tretmani traju oko 60 minuta." },
+      { "q": "Da li laserska epilacija boli?", "a": "Laserska epilacija može izazvati blagi osjećaj nelagode, sličan pucketanju gumicom po koži. Naši uređaji imaju ugrađen sistem hlađenja koji značajno smanjuje nelagodu." },
+      { "q": "Koliko tretmana laserske epilacije je potrebno?", "a": "Za optimalne rezultate preporučujemo 6-8 tretmana u razmacima od 4-6 sedmica. Broj tretmana zavisi od područja tijela i tipa kože." },
+      { "q": "Kako se pripremiti za tretman?", "a": "Preporučujemo da dođete sa čistom kožom bez šminke za tretmane lica. Za lasersku epilaciju, izbjegavajte sunčanje 2 sedmice prije tretmana." },
+      { "q": "Kakva je politika otkazivanja?", "a": "Molimo vas da otkazujete ili pomjerite termin najmanje 24 sata unaprijed. Kasna otkazivanja ili nedolazak mogu rezultirati naplatom 50% cijene tretmana." },
+      { "q": "Da li mogu doći bez zakazivanja?", "a": "Preporučujemo zakazivanje unaprijed kako bismo vam garantovali termin. Ipak, ako imamo slobodan termin, rado ćemo vas primiti." },
+      { "q": "Koje proizvode koristite?", "a": "Koristimo premium profesionalne kozmetičke linije poznatih svjetskih brendova. Svi proizvodi su dermatološki testirani i prilagođeni različitim tipovima kože." },
+      { "q": "Da li nudite pakete sa popustom?", "a": "Da! Nudimo razne pakete tretmana sa značajnim popustima. Pogledajte naš cjenovnik za detalje o paketima ili nas kontaktirajte za personalizovanu ponudu." },
+      { "q": "Koje su metode plaćanja?", "a": "Prihvatamo gotovinu, kartice (Visa, Mastercard) i bankarski transfer. Za pakete tretmana nudimo mogućnost plaćanja na rate." },
+      { "q": "Da li ima parking?", "a": "Da, u neposrednoj blizini salona nalazi se javni parking. Takođe, salon je dobro povezan javnim prevozom - autobuske linije 3, 6, 11 i 19." }
+    ]
+  },
+  "contact": {
+    "title": "Kontaktirajte nas",
+    "subtitle": "Rado ćemo odgovoriti na sva vaša pitanja",
+    "location": "Naša lokacija",
+    "address": "Bulevar Svetog Petra Cetinjskog, Podgorica",
+    "parking": "U neposrednoj blizini se nalazi javni parking",
+    "transport": "Autobuske linije 3, 6, 11 i 19",
+    "info": {
+      "addressTitle": "Adresa",
+      "phoneTitle": "Telefon",
+      "emailTitle": "Email",
+      "phone": "+382 XX XXX XXX",
+      "hours": "Pon-Pet: 09:00-20:00, Sub: 09:00-15:00",
+      "email": "info@skinlab011.com",
+      "response": "Odgovaramo u roku od 24 sata"
+    }
+  },
+  "footer": {
+    "rights": "Sva prava zadržana.",
+    "poweredBy": "Powered by"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "bookings": "Rezervacije",
+    "prices": "Cjenovnik",
+    "settings": "Podešavanja",
+    "logout": "Odjavi se",
+    "login": "Prijavi se sa Google nalogom",
+    "loginTitle": "Admin Panel",
+    "loginSubtitle": "Prijavite se za pristup admin panelu",
+    "recentBookings": "Nedavne rezervacije",
+    "todayBookings": "Danas",
+    "pendingBookings": "Na čekanju",
+    "totalBookings": "Ukupno",
+    "status": {
+      "pending": "Na čekanju",
+      "confirmed": "Potvrđeno",
+      "rejected": "Odbijeno",
+      "cancelled": "Otkazano"
+    },
+    "actions": {
+      "confirm": "Potvrdi",
+      "reject": "Odbij",
+      "cancel": "Otkaži",
+      "edit": "Izmijeni",
+      "save": "Sačuvaj",
+      "delete": "Obriši",
+      "add": "Dodaj"
+    },
+    "priceEditor": {
+      "title": "Upravljanje cjenovnikom",
+      "nameME": "Naziv (CG)",
+      "nameEN": "Naziv (EN)",
+      "nameRU": "Naziv (RU)",
+      "price": "Cijena",
+      "duration": "Trajanje (min)",
+      "active": "Aktivno",
+      "addTreatment": "Dodaj tretman",
+      "saved": "Promjene sačuvane!"
+    }
+  },
+  "common": {
+    "loading": "Učitavanje...",
+    "noResults": "Nema rezultata",
+    "close": "Zatvori",
+    "back": "Nazad",
+    "next": "Dalje",
+    "required": "Obavezno polje"
+  }
+}
