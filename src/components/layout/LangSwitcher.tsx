@@ -4,9 +4,9 @@ import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 
 const locales = [
-  { code: "me" as const, label: "ME" },
-  { code: "en" as const, label: "EN" },
-  { code: "ru" as const, label: "RU" },
+  { code: "me" as const, label: "ME", flag: "🇲🇪" },
+  { code: "en" as const, label: "EN", flag: "🇬🇧" },
+  { code: "ru" as const, label: "RU", flag: "🇷🇺" },
 ];
 
 export default function LangSwitcher() {
@@ -19,17 +19,14 @@ export default function LangSwitcher() {
   };
 
   return (
-    <div className="flex gap-1">
-      {locales.map(({ code, label }) => (
+    <div style={{ display: "flex", gap: "0.5rem" }}>
+      {locales.map(({ code, label, flag }) => (
         <button
           key={code}
           onClick={() => handleSwitch(code)}
-          className={`px-3 py-1 rounded-full text-xs font-semibold border-none cursor-pointer transition-all ${
-            currentLocale === code
-              ? "bg-primary text-white"
-              : "bg-secondary text-dark hover:bg-primary hover:text-white"
-          }`}
+          className={`lang-btn ${currentLocale === code ? "active" : ""}`}
         >
+          <span style={{ fontSize: "1rem", lineHeight: 1 }}>{flag}</span>
           {label}
         </button>
       ))}

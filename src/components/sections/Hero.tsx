@@ -35,7 +35,7 @@ export default function Hero() {
       <div className="text-center z-10 px-5">
         <h1
           className="font-heading text-6xl md:text-8xl font-light tracking-[8px] mb-4"
-          style={{ color: "#2C2C2C" }}
+          style={{ color: "var(--color-primary)", letterSpacing: "8px" }}
         >
           {t("title")}
         </h1>
@@ -47,7 +47,7 @@ export default function Hero() {
         </p>
         <a
           href="#booking"
-          className="inline-block px-10 py-4 text-white font-semibold text-sm tracking-[3px] rounded-full no-underline transition-all hover:scale-105 hover:shadow-lg"
+          className="cta-button"
           style={{
             background: "linear-gradient(135deg, #D4AF78, #C9A666)",
           }}

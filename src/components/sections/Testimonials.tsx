@@ -8,7 +8,7 @@ export default function Testimonials() {
   const items = [0, 1, 2];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20" style={{ background: "var(--color-secondary)" }}>
       <div className="container">
         <h2 className="section-title">{t("title")}</h2>
         <p className="section-subtitle">{t("subtitle")}</p>

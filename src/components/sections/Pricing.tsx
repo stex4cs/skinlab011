@@ -50,7 +50,7 @@ export default function Pricing() {
 
   if (loading) {
     return (
-      <section id="pricing" className="py-20 bg-light">
+      <section id="pricing" className="py-20" style={{ background: "var(--color-secondary)" }}>
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="section-title">{t("title")}</h2>
           <p className="section-subtitle">{t("subtitle")}</p>
@@ -81,10 +81,10 @@ export default function Pricing() {
           {categories.map((category) => (
             <div
               key={category.id}
-              className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="pricing-card"
             >
               <h3
-                className="font-heading text-xl font-semibold text-center mb-4 pb-3"
+                className="pricing-card-title"
                 style={{ borderBottom: `2px solid ${category.color}` }}
               >
                 {getLocalizedName(category, locale)}
@@ -93,12 +93,12 @@ export default function Pricing() {
                 {category.treatments.map((treatment) => (
                   <div
                     key={treatment.id}
-                    className="flex justify-between items-center py-2 border-b border-gray-100 last:border-none"
+                    className="pricing-item"
                   >
-                    <span className="text-sm text-dark/80 pr-2">
+                    <span className="">
                       {getLocalizedName(treatment, locale)}
                     </span>
-                    <span className="text-sm font-semibold text-primary whitespace-nowrap">
+                    <span className="pricing-item-price">
                       {treatment.price}
                     </span>
                   </div>

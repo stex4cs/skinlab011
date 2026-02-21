@@ -38,8 +38,8 @@ export default function Navbar() {
             : "bg-white/80 backdrop-blur-sm"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-5 flex justify-between items-center h-[70px]">
-          <Link href="/" className="text-2xl font-bold text-dark font-heading tracking-wider no-underline">
+        <div className="container flex justify-between items-center h-[70px]">
+          <Link href="/" className="text-2xl font-bold font-heading tracking-wider no-underline" style={{ color: "var(--color-primary)", letterSpacing: "3px" }}>
             SKINLAB 011
           </Link>
 
@@ -49,7 +49,7 @@ export default function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-dark no-underline text-sm font-medium tracking-wide uppercase hover:text-primary transition-colors"
+                  className="nav-link"
                 >
                   {link.label}
                 </a>

@@ -17,7 +17,7 @@ export default function Services() {
   const t = useTranslations("services");
 
   return (
-    <section id="services" className="py-20 bg-white">
+    <section id="services" className="py-20" style={{ background: "var(--color-light)" }}>
       <div className="container">
         <h2 className="section-title">{t("title")}</h2>
         <p className="section-subtitle">{t("subtitle")}</p>
@@ -26,13 +26,13 @@ export default function Services() {
           {serviceKeys.map(({ key, icon }) => (
             <div
               key={key}
-              className="bg-light rounded-2xl p-8 text-center transition-all hover:-translate-y-2 hover:shadow-xl cursor-pointer"
+              className="service-card"
             >
               <div className="text-5xl mb-4">{icon}</div>
-              <h3 className="font-heading text-xl font-semibold text-dark mb-3">
+              <h3 className="">
                 {t(`items.${key}.title`)}
               </h3>
-              <p className="text-dark/60 text-sm leading-relaxed">
+              <p className="">
                 {t(`items.${key}.description`)}
               </p>
             </div>

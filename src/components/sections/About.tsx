@@ -27,7 +27,7 @@ export default function About() {
   ] as const;
 
   return (
-    <section id="about" className="py-20 bg-light">
+    <section id="about" className="py-20 bg-white">
       <div className="container">
         <h2 className="section-title">{t("title")}</h2>
 
@@ -72,7 +72,7 @@ export default function About() {
           <h3 className="font-heading text-2xl font-semibold text-dark mb-2">
             {t("owner.name")}
           </h3>
-          <p className="text-primary font-medium mb-4">{t("owner.title")}</p>
+          <p className="mb-4" style={{ color: "var(--color-primary)", fontWeight: 500 }}>{t("owner.title")}</p>
           <p className="text-dark/70 mb-6 leading-relaxed">{t("owner.bio")}</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {credentials.map((cred) => (
