@@ -9,6 +9,30 @@ import { TIME_SLOTS } from "@/lib/constants";
 import { Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  padding: "0.85rem 1.1rem",
+  border: "1px solid rgba(212,175,120,0.3)",
+  borderRadius: "12px",
+  fontSize: "0.88rem",
+  fontFamily: "var(--font-body)",
+  color: "var(--color-dark)",
+  background: "var(--color-light)",
+  outline: "none",
+  transition: "border-color 0.2s ease",
+  boxSizing: "border-box",
+};
+
+const labelStyle: React.CSSProperties = {
+  display: "block",
+  fontSize: "0.75rem",
+  fontWeight: 600,
+  letterSpacing: "0.8px",
+  textTransform: "uppercase",
+  marginBottom: "0.4rem",
+  color: "rgba(44,44,44,0.65)",
+};
+
 export default function BookingForm() {
   const t = useTranslations("booking");
   const locale = useLocale() as Locale;
@@ -16,7 +40,7 @@ export default function BookingForm() {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    async function fetch() {
+    async function fetchData() {
       const supabase = createClient();
       const { data: cats } = await supabase
         .from("treatment_categories")
@@ -32,12 +56,12 @@ export default function BookingForm() {
         setCategories(
           cats.map((cat) => ({
             ...cat,
-            treatments: treatments.filter((t) => t.category_id === cat.id),
+            treatments: treatments.filter((tr) => tr.category_id === cat.id),
           }))
         );
       }
     }
-    fetch();
+    fetchData();
   }, []);
 
   const today = new Date().toISOString().split("T")[0];
@@ -81,25 +105,42 @@ export default function BookingForm() {
   }
 
   return (
-    <section id="booking" className="py-20 bg-secondary/30">
+    <section id="booking" className="py-24" style={{ background: "var(--color-secondary)" }}>
       <div className="container">
         <h2 className="section-title">{t("title")}</h2>
         <p className="section-subtitle">{t("subtitle")}</p>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Why book */}
+        <div className="grid md:grid-cols-2 gap-16 items-start">
+
+          {/* Left – Why book */}
           <div>
-            <h3 className="font-heading text-2xl font-semibold text-dark mb-6">
+            <h3
+              className="font-heading mb-10"
+              style={{ fontSize: "1.8rem", color: "var(--color-dark)", fontWeight: 400 }}
+            >
               {t("whyTitle")}
             </h3>
             {(["fast", "premium", "expert", "personal"] as const).map((key) => (
-              <div key={key} className="flex items-start gap-4 mb-6">
-                <div className="text-3xl">{t(`reasons.${key}.icon`)}</div>
+              <div key={key} className="flex items-start gap-5 mb-8">
+                <div
+                  className="flex items-center justify-center flex-shrink-0 rounded-full text-xl"
+                  style={{
+                    width: "54px",
+                    height: "54px",
+                    background: "white",
+                    boxShadow: "0 4px 20px rgba(212,175,120,0.2)",
+                  }}
+                >
+                  {t(`reasons.${key}.icon`)}
+                </div>
                 <div>
-                  <h4 className="font-semibold text-dark mb-1">
+                  <h4
+                    className="font-semibold mb-1"
+                    style={{ fontSize: "0.95rem", color: "var(--color-dark)" }}
+                  >
                     {t(`reasons.${key}.title`)}
                   </h4>
-                  <p className="text-dark/60 text-sm">
+                  <p style={{ fontSize: "0.85rem", color: "rgba(44,44,44,0.58)", lineHeight: 1.75 }}>
                     {t(`reasons.${key}.desc`)}
                   </p>
                 </div>
@@ -107,122 +148,101 @@ export default function BookingForm() {
             ))}
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 shadow-lg">
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="block text-sm font-medium text-dark mb-1">
-                  {t("form.name")} *
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary transition-colors"
-                />
+          {/* Right – Form */}
+          <div
+            className="rounded-2xl"
+            style={{
+              background: "white",
+              padding: "2.5rem",
+              boxShadow: "0 20px 60px rgba(212,175,120,0.15)",
+            }}
+          >
+            <form onSubmit={handleSubmit}>
+              <div className="grid grid-cols-2 gap-4 mb-5">
+                <div>
+                  <label style={labelStyle}>{t("form.name")} *</label>
+                  <input type="text" name="name" required style={inputStyle} />
+                </div>
+                <div>
+                  <label style={labelStyle}>{t("form.email")} *</label>
+                  <input type="email" name="email" required style={inputStyle} />
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-dark mb-1">
-                  {t("form.email")} *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary transition-colors"
-                />
+
+              <div className="mb-5">
+                <label style={labelStyle}>{t("form.phone")} *</label>
+                <input type="tel" name="phone" required style={inputStyle} />
               </div>
-            </div>
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-dark mb-1">
-                {t("form.phone")} *
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                required
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary transition-colors"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-dark mb-1">
-                {t("form.treatment")} *
-              </label>
-              <select
-                name="treatment"
-                required
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary transition-colors bg-white"
-              >
-                <option value="">{t("form.treatment")}</option>
-                {categories.map((cat) => (
-                  <optgroup key={cat.id} label={getLocalizedName(cat, locale)}>
-                    {cat.treatments.map((tr) => (
-                      <option key={tr.id} value={tr.id}>
-                        {getLocalizedName(tr, locale)} - {tr.price}
-                      </option>
-                    ))}
-                  </optgroup>
-                ))}
-              </select>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="block text-sm font-medium text-dark mb-1">
-                  {t("form.date")} *
-                </label>
-                <input
-                  type="date"
-                  name="date"
-                  required
-                  min={today}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-dark mb-1">
-                  {t("form.time")} *
-                </label>
+              <div className="mb-5">
+                <label style={labelStyle}>{t("form.treatment")} *</label>
                 <select
-                  name="time"
+                  name="treatment"
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary transition-colors bg-white"
+                  style={{ ...inputStyle, cursor: "pointer" }}
                 >
-                  <option value="">{t("form.time")}</option>
-                  {TIME_SLOTS.map((slot) => (
-                    <option key={slot} value={slot}>
-                      {slot}
-                    </option>
+                  <option value="">{t("form.treatment")}</option>
+                  {categories.map((cat) => (
+                    <optgroup key={cat.id} label={getLocalizedName(cat, locale)}>
+                      {cat.treatments.map((tr) => (
+                        <option key={tr.id} value={tr.id}>
+                          {getLocalizedName(tr, locale)} — {tr.price}
+                        </option>
+                      ))}
+                    </optgroup>
                   ))}
                 </select>
               </div>
-            </div>
 
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-dark mb-1">
-                {t("form.message")}
-              </label>
-              <textarea
-                name="message"
-                rows={4}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary transition-colors resize-none"
-              />
-            </div>
+              <div className="grid grid-cols-2 gap-4 mb-5">
+                <div>
+                  <label style={labelStyle}>{t("form.date")} *</label>
+                  <input type="date" name="date" required min={today} style={inputStyle} />
+                </div>
+                <div>
+                  <label style={labelStyle}>{t("form.time")} *</label>
+                  <select
+                    name="time"
+                    required
+                    style={{ ...inputStyle, cursor: "pointer" }}
+                  >
+                    <option value="">{t("form.time")}</option>
+                    {TIME_SLOTS.map((slot) => (
+                      <option key={slot} value={slot}>{slot}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
 
-            <button
-              type="submit"
-              disabled={submitting}
-              className="w-full py-4 text-white font-semibold text-sm tracking-wider rounded-xl border-none cursor-pointer transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              style={{
-                background: "linear-gradient(135deg, var(--color-primary), var(--color-accent))",
-              }}
-            >
-              {submitting && <Loader2 size={18} className="animate-spin" />}
-              {submitting ? t("form.submitting") : t("form.submit")}
-            </button>
-          </form>
+              <div className="mb-8">
+                <label style={labelStyle}>{t("form.message")}</label>
+                <textarea
+                  name="message"
+                  rows={3}
+                  style={{ ...inputStyle, resize: "none" }}
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="cta-button"
+                style={{
+                  width: "100%",
+                  border: "none",
+                  cursor: submitting ? "not-allowed" : "pointer",
+                  opacity: submitting ? 0.7 : 1,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.5rem",
+                }}
+              >
+                {submitting && <Loader2 size={18} className="animate-spin" />}
+                {submitting ? t("form.submitting") : t("form.submit")}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </section>

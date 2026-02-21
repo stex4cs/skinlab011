@@ -163,7 +163,12 @@
   },
   "footer": {
     "rights": "All rights reserved.",
-    "poweredBy": "Powered by"
+    "poweredBy": "Powered by",
+    "tagline": "Modern beauty salon in the heart of Podgorica. Beauty and care in one place.",
+    "navTitle": "Navigation",
+    "contactTitle": "Contact",
+    "hoursWeekdays": "Mon–Fri: 09:00–19:00",
+    "hoursSaturday": "Saturday: 09:00–15:00"
   },
   "admin": {
     "dashboard": "Dashboard",

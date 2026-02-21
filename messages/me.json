@@ -163,7 +163,12 @@
   },
   "footer": {
     "rights": "Sva prava zadržana.",
-    "poweredBy": "Powered by"
+    "poweredBy": "Powered by",
+    "tagline": "Moderni kozmetički salon u srcu Podgorice. Krasota i njega na jednom mjestu.",
+    "navTitle": "Navigacija",
+    "contactTitle": "Kontakt",
+    "hoursWeekdays": "Pon–Pet: 09:00–19:00",
+    "hoursSaturday": "Subota: 09:00–15:00"
   },
   "admin": {
     "dashboard": "Dashboard",
