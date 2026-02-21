@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import type { Metadata } from "next";
 import Script from "next/script";
 
-const BASE_URL = "https://skinlab011.me";
+const BASE_URL = "https://skinlab011.com";
 
 const SEO: Record<string, { title: string; description: string; keywords: string }> = {
   me: {
