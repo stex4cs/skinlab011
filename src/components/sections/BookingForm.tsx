@@ -105,7 +105,7 @@ export default function BookingForm() {
   }
 
   return (
-    <section id="booking" className="py-24" style={{ background: "var(--color-secondary)" }}>
+    <section id="booking" className="pt-24 pb-36" style={{ background: "var(--color-secondary)" }}>
       <div className="container">
         <h2 className="section-title">{t("title")}</h2>
         <p className="section-subtitle">{t("subtitle")}</p>

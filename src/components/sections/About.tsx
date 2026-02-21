@@ -20,7 +20,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-20 bg-white">
+    <section id="about" className="pt-20 pb-32 bg-white">
       <div className="container">
         <h2 className="section-title">{t("title")}</h2>
 

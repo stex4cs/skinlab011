@@ -11,7 +11,7 @@ export default function FAQ() {
   const items = Array.from({ length: 10 }, (_, i) => i);
 
   return (
-    <section id="faq" className="py-24" style={{ background: "var(--color-light)" }}>
+    <section id="faq" className="pt-24 pb-36" style={{ background: "var(--color-light)" }}>
       <div className="container">
         <h2 className="section-title">{t("title")}</h2>
         <p className="section-subtitle">{t("subtitle")}</p>

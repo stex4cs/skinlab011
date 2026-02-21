@@ -1,51 +1,29 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { MapPin, Phone, Mail, Car, Bus } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 
 export default function Contact() {
   const t = useTranslations("contact");
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="pt-20 pb-32 bg-white">
       <div className="container">
         <h2 className="section-title">{t("title")}</h2>
         <p className="section-subtitle">{t("subtitle")}</p>
 
         {/* Map */}
-        <div>
-          <h3
-            className="font-heading text-xl font-semibold text-dark mb-6"
-            style={{ letterSpacing: "1px" }}
-          >
-            {t("location")}
-          </h3>
-          <div className="rounded-2xl overflow-hidden shadow-lg">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d357.4866198632401!2d19.237268905288104!3d42.444069436222655!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134deb003f53f151%3A0x8ac8c530ffb6c658!2sInfinity%20reformer%20pilates!5e1!3m2!1ssr!2srs!4v1771694984084!5m2!1ssr!2srs"
-              width="100%"
-              height="420"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="SkinLab 011 Location"
-            />
-          </div>
-          <div className="grid md:grid-cols-3 gap-4 mt-4">
-            <div className="flex items-start gap-3 p-4 rounded-xl" style={{ background: "var(--color-secondary)" }}>
-              <MapPin style={{ color: "var(--color-primary)", flexShrink: 0, marginTop: "2px" }} size={18} />
-              <span className="text-sm text-dark/70">{t("address")}</span>
-            </div>
-            <div className="flex items-start gap-3 p-4 rounded-xl" style={{ background: "var(--color-secondary)" }}>
-              <Car style={{ color: "var(--color-primary)", flexShrink: 0, marginTop: "2px" }} size={18} />
-              <span className="text-sm text-dark/70">{t("parking")}</span>
-            </div>
-            <div className="flex items-start gap-3 p-4 rounded-xl" style={{ background: "var(--color-secondary)" }}>
-              <Bus style={{ color: "var(--color-primary)", flexShrink: 0, marginTop: "2px" }} size={18} />
-              <span className="text-sm text-dark/70">{t("transport")}</span>
-            </div>
-          </div>
+        <div className="rounded-2xl overflow-hidden shadow-lg">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d357.4866198632401!2d19.237268905288104!3d42.444069436222655!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134deb003f53f151%3A0x8ac8c530ffb6c658!2sInfinity%20reformer%20pilates!5e1!3m2!1ssr!2srs!4v1771694984084!5m2!1ssr!2srs"
+            width="100%"
+            height="420"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="SkinLab 011 Location"
+          />
         </div>
 
         {/* Contact Info */}
@@ -102,7 +80,7 @@ export default function Contact() {
               {t("info.emailTitle")}
             </h4>
             <a
-              href="mailto:business@bif.events"
+              href="mailto:skinlab011@gmail.com"
               className="text-dark/70 text-sm no-underline block mb-1"
             >
               {t("info.email")}

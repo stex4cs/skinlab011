@@ -17,7 +17,7 @@ export default function Services() {
   const t = useTranslations("services");
 
   return (
-    <section id="services" className="py-20" style={{ background: "var(--color-light)" }}>
+    <section id="services" className="pt-20 pb-32" style={{ background: "var(--color-light)" }}>
       <div className="container">
         <h2 className="section-title">{t("title")}</h2>
         <p className="section-subtitle">{t("subtitle")}</p>
