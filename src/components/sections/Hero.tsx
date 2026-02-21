@@ -34,22 +34,22 @@ export default function Hero() {
 
       <div className="text-center z-10 px-5">
         <h1
-          className="font-heading text-6xl md:text-8xl font-light text-dark tracking-[8px] mb-4 animate-fade-in-up"
+          className="font-heading text-6xl md:text-8xl font-light tracking-[8px] mb-4"
+          style={{ color: "#2C2C2C" }}
         >
           {t("title")}
         </h1>
         <p
-          className="text-lg md:text-xl text-dark/70 mb-10 font-light tracking-wider animate-fade-in-up"
-          style={{ animationDelay: "0.2s" }}
+          className="text-lg md:text-xl mb-10 font-light tracking-wider"
+          style={{ color: "rgba(44,44,44,0.7)" }}
         >
           {t("subtitle")}
         </p>
         <a
           href="#booking"
-          className="inline-block px-10 py-4 text-white font-semibold text-sm tracking-[3px] rounded-full no-underline transition-all hover:scale-105 hover:shadow-lg animate-fade-in-up"
+          className="inline-block px-10 py-4 text-white font-semibold text-sm tracking-[3px] rounded-full no-underline transition-all hover:scale-105 hover:shadow-lg"
           style={{
-            background: "linear-gradient(135deg, var(--color-primary), var(--color-accent))",
-            animationDelay: "0.4s",
+            background: "linear-gradient(135deg, #D4AF78, #C9A666)",
           }}
         >
           {t("cta")}

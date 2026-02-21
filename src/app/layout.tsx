@@ -30,9 +30,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning>
+    <html lang="me" suppressHydrationWarning>
       <body
         className={`${cormorant.variable} ${montserrat.variable} antialiased`}
+        style={{ fontFamily: "var(--font-body, 'Montserrat', sans-serif)" }}
       >
         {children}
       </body>

@@ -19,13 +19,9 @@ export default async function LocaleLayout({
   const messages = (await import(`../../../messages/${locale}.json`)).default;
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-          <Toaster position="bottom-right" />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      {children}
+      <Toaster position="bottom-right" />
+    </NextIntlClientProvider>
   );
 }
