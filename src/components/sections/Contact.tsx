@@ -22,7 +22,7 @@ export default function Contact() {
           </h3>
           <div className="rounded-2xl overflow-hidden shadow-lg">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2944.5!2d19.26!3d42.44!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDI2JzI0LjAiTiAxOcKwMTUnMzYuMCJF!5e0!3m2!1sen!2s!4v1"
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d357.4866198632401!2d19.237268905288104!3d42.444069436222655!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134deb003f53f151%3A0x8ac8c530ffb6c658!2sInfinity%20reformer%20pilates!5e1!3m2!1ssr!2srs!4v1771694984084!5m2!1ssr!2srs"
               width="100%"
               height="420"
               style={{ border: 0 }}
@@ -80,7 +80,7 @@ export default function Contact() {
               {t("info.phoneTitle")}
             </h4>
             <a
-              href="tel:+38269811011"
+              href="tel:+38267487497"
               className="text-dark/70 text-sm no-underline block mb-1"
             >
               {t("info.phone")}

@@ -24,10 +24,10 @@ export default function About() {
       <div className="container">
         <h2 className="section-title">{t("title")}</h2>
 
-        <div className="grid md:grid-cols-2 gap-12 mt-12 items-start">
+        <div className="grid md:grid-cols-2 gap-12 mt-12 items-stretch">
 
           {/* Left column: story + stats + Neda bio */}
-          <div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
             <h3 className="font-heading text-2xl font-semibold text-dark mb-4">
               {t("storyTitle")}
             </h3>
@@ -53,10 +53,10 @@ export default function About() {
               ))}
             </div>
 
-            {/* Neda bio - directly below stats */}
+            {/* Neda bio - directly below stats, stretches to fill remaining height */}
             <div
               className="rounded-2xl p-7"
-              style={{ background: "var(--color-secondary)" }}
+              style={{ background: "var(--color-secondary)", flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}
             >
               <h3 className="font-heading text-xl font-semibold text-dark mb-1">
                 {t("owner.name")}
@@ -83,15 +83,16 @@ export default function About() {
             </div>
           </div>
 
-          {/* Right column: Neda image */}
-          <div className="relative">
-            <div className="rounded-2xl overflow-hidden shadow-xl">
+          {/* Right column: Neda image – fills full column height */}
+          <div style={{ position: "relative", minHeight: "500px" }}>
+            <div className="rounded-2xl overflow-hidden shadow-xl" style={{ height: "100%" }}>
               <Image
                 src="/images/neda.png"
                 alt="SkinLab 011 - Neda Vukobrat"
                 width={500}
-                height={600}
-                className="w-full h-auto object-cover"
+                height={800}
+                className="w-full object-cover"
+                style={{ height: "100%", objectFit: "cover" }}
               />
             </div>
           </div>
