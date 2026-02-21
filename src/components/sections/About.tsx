@@ -55,27 +55,51 @@ export default function About() {
 
             {/* Neda bio - directly below stats, stretches to fill remaining height */}
             <div
-              className="rounded-2xl p-7"
-              style={{ background: "var(--color-secondary)", flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}
+              style={{
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                paddingTop: "2rem",
+              }}
             >
-              <h3 className="font-heading text-xl font-semibold text-dark mb-1">
-                {t("owner.name")}
-              </h3>
-              <p
-                className="mb-4 text-sm font-medium"
-                style={{ color: "var(--color-primary)" }}
-              >
-                {t("owner.title")}
-              </p>
-              <p className="text-dark/70 text-sm leading-relaxed mb-6">
-                {t("owner.bio")}
-              </p>
-              <div className="grid grid-cols-2 gap-2">
+              <div>
+                <h3 className="font-heading text-xl font-semibold text-dark mb-1">
+                  {t("owner.name")}
+                </h3>
+                <p
+                  className="mb-5 text-sm font-medium"
+                  style={{ color: "var(--color-primary)", letterSpacing: "0.5px" }}
+                >
+                  {t("owner.title")}
+                </p>
+                <p className="text-dark/65 text-sm leading-relaxed">
+                  {t("owner.bio")}
+                </p>
+              </div>
+
+              {/* Credential tags */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginTop: "2rem" }}>
                 {credentials.map((cred) => (
                   <div
                     key={cred}
-                    className="bg-white rounded-xl p-3 text-center text-xs text-dark/70 shadow-sm"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.75rem",
+                      fontSize: "0.82rem",
+                      color: "rgba(44,44,44,0.75)",
+                    }}
                   >
+                    <span
+                      style={{
+                        width: "6px",
+                        height: "6px",
+                        borderRadius: "50%",
+                        background: "var(--color-primary)",
+                        flexShrink: 0,
+                      }}
+                    />
                     {cred}
                   </div>
                 ))}
