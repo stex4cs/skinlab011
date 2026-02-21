@@ -100,7 +100,7 @@ export default function Footer() {
                   }}
                 />
                 <span className="text-sm" style={{ color: "rgba(255,255,255,0.65)" }}>
-                  Bulevar Svetog Petra Cetinjskog, Podgorica
+                  Ul Baku 9A, Podgorica
                 </span>
               </div>
               <div className="flex items-center gap-3">
@@ -109,11 +109,11 @@ export default function Footer() {
                   style={{ color: "var(--color-primary)", flexShrink: 0 }}
                 />
                 <a
-                  href="tel:+38269811011"
+                  href="tel:+38267487497"
                   className="text-sm no-underline"
                   style={{ color: "rgba(255,255,255,0.65)" }}
                 >
-                  +382 69 811 011
+                  +382 67 487 497
                 </a>
               </div>
               <div className="flex items-center gap-3">
@@ -122,11 +122,11 @@ export default function Footer() {
                   style={{ color: "var(--color-primary)", flexShrink: 0 }}
                 />
                 <a
-                  href="mailto:business@bif.events"
+                  href="mailto:skinlab011@gmail.com"
                   className="text-sm no-underline"
                   style={{ color: "rgba(255,255,255,0.65)" }}
                 >
-                  business@bif.events
+                  skinlab011@gmail.com
                 </a>
               </div>
               <div className="flex items-start gap-3">

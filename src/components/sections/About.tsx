@@ -24,8 +24,9 @@ export default function About() {
       <div className="container">
         <h2 className="section-title">{t("title")}</h2>
 
-        <div className="grid md:grid-cols-2 gap-12 mt-12">
-          {/* Story */}
+        <div className="grid md:grid-cols-2 gap-12 mt-12 items-start">
+
+          {/* Left column: story + stats + Neda bio */}
           <div>
             <h3 className="font-heading text-2xl font-semibold text-dark mb-4">
               {t("storyTitle")}
@@ -34,9 +35,13 @@ export default function About() {
             <p className="text-dark/70 mb-8 leading-relaxed">{t("storyP2")}</p>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-4 mb-8">
               {stats.map((stat) => (
-                <div key={stat.label} className="text-center p-4 rounded-xl" style={{ background: "var(--color-secondary)" }}>
+                <div
+                  key={stat.label}
+                  className="text-center p-4 rounded-xl"
+                  style={{ background: "var(--color-secondary)" }}
+                >
                   <div
                     className="text-2xl font-bold font-heading"
                     style={{ color: "var(--color-primary)" }}
@@ -47,40 +52,48 @@ export default function About() {
                 </div>
               ))}
             </div>
+
+            {/* Neda bio - directly below stats */}
+            <div
+              className="rounded-2xl p-7"
+              style={{ background: "var(--color-secondary)" }}
+            >
+              <h3 className="font-heading text-xl font-semibold text-dark mb-1">
+                {t("owner.name")}
+              </h3>
+              <p
+                className="mb-4 text-sm font-medium"
+                style={{ color: "var(--color-primary)" }}
+              >
+                {t("owner.title")}
+              </p>
+              <p className="text-dark/70 text-sm leading-relaxed mb-6">
+                {t("owner.bio")}
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                {credentials.map((cred) => (
+                  <div
+                    key={cred}
+                    className="bg-white rounded-xl p-3 text-center text-xs text-dark/70 shadow-sm"
+                  >
+                    {cred}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Image */}
+          {/* Right column: Neda image */}
           <div className="relative">
             <div className="rounded-2xl overflow-hidden shadow-xl">
               <Image
                 src="/images/neda.png"
-                alt="SkinLab 011 – Neda Vukobrat"
+                alt="SkinLab 011 - Neda Vukobrat"
                 width={500}
                 height={600}
                 className="w-full h-auto object-cover"
               />
             </div>
-          </div>
-        </div>
-
-        {/* Owner bio – directly under Our Story */}
-        <div className="mt-12 rounded-2xl p-8 md:p-12" style={{ background: "var(--color-secondary)" }}>
-          <h3 className="font-heading text-2xl font-semibold text-dark mb-1">
-            {t("owner.name")}
-          </h3>
-          <p className="mb-5 font-medium" style={{ color: "var(--color-primary)" }}>
-            {t("owner.title")}
-          </p>
-          <p className="text-dark/70 mb-8 leading-relaxed">{t("owner.bio")}</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {credentials.map((cred) => (
-              <div
-                key={cred}
-                className="bg-white rounded-xl p-4 text-center text-sm text-dark/80 shadow-sm"
-              >
-                {cred}
-              </div>
-            ))}
           </div>
         </div>
       </div>

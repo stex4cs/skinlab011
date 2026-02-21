@@ -94,12 +94,12 @@ const jsonLd = {
     "Moderni kozmetički salon u Podgorici. Tretmani lica, tijela, masaže i depilacija.",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Bulevar Svetog Petra Cetinjskog",
+    streetAddress: "Ul Baku 9A",
     addressLocality: "Podgorica",
     addressCountry: "ME",
   },
-  telephone: "+38269811011",
-  email: "business@bif.events",
+  telephone: "+38267487497",
+  email: "skinlab011@gmail.com",
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",

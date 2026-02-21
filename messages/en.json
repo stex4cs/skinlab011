@@ -38,7 +38,7 @@
     "storyP1": "SkinLab 011 is a modern beauty salon located in the heart of Podgorica. Our mission is to provide you with premium treatments using state-of-the-art equipment and premium cosmetic products.",
     "storyP2": "With a team of certified professionals and an individualized approach to each client, we are dedicated to helping you feel and look your best.",
     "stats": {
-      "year": "2025",
+      "year": "2026",
       "yearLabel": "Year founded",
       "clients": "500+",
       "clientsLabel": "Satisfied clients",
@@ -148,16 +148,16 @@
     "title": "Contact Us",
     "subtitle": "We're happy to answer all your questions",
     "location": "Our Location",
-    "address": "Bulevar Svetog Petra Cetinjskog, Podgorica",
+    "address": "Ul Baku 9A, Podgorica",
     "parking": "Public parking available nearby",
     "transport": "Bus lines 3, 6, 11 and 19",
     "info": {
       "addressTitle": "Address",
       "phoneTitle": "Phone",
       "emailTitle": "Email",
-      "phone": "+382 XX XXX XXX",
-      "hours": "Mon-Fri: 09:00-20:00, Sat: 09:00-15:00",
-      "email": "info@skinlab011.com",
+      "phone": "+382 67 487 497",
+      "hours": "Mon-Fri: 09:00-19:00, Sat: 09:00-15:00",
+      "email": "skinlab011@gmail.com",
       "response": "We respond within 24 hours"
     }
   },
