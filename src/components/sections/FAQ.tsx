@@ -11,8 +11,8 @@ export default function FAQ() {
   const items = Array.from({ length: 10 }, (_, i) => i);
 
   return (
-    <section id="faq" className="py-20 px-5 bg-light">
-      <div className="max-w-3xl mx-auto">
+    <section id="faq" className="py-20 bg-light">
+      <div className="container" style={{maxWidth: '768px'}}>
         <h2 className="section-title">{t("title")}</h2>
         <p className="section-subtitle">{t("subtitle")}</p>
 

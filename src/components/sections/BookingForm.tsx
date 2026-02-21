@@ -81,8 +81,8 @@ export default function BookingForm() {
   }
 
   return (
-    <section id="booking" className="py-20 px-5 bg-secondary/30">
-      <div className="max-w-7xl mx-auto">
+    <section id="booking" className="py-20 bg-secondary/30">
+      <div className="container">
         <h2 className="section-title">{t("title")}</h2>
         <p className="section-subtitle">{t("subtitle")}</p>
 

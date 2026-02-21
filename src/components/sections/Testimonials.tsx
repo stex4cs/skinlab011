@@ -8,8 +8,8 @@ export default function Testimonials() {
   const items = [0, 1, 2];
 
   return (
-    <section className="py-20 px-5 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20 bg-white">
+      <div className="container">
         <h2 className="section-title">{t("title")}</h2>
         <p className="section-subtitle">{t("subtitle")}</p>
 

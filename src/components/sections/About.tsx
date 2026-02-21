@@ -27,8 +27,8 @@ export default function About() {
   ] as const;
 
   return (
-    <section id="about" className="py-20 px-5 bg-light">
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="py-20 bg-light">
+      <div className="container">
         <h2 className="section-title">{t("title")}</h2>
 
         <div className="grid md:grid-cols-2 gap-12 mt-12">

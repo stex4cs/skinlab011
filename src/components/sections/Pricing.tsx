@@ -50,7 +50,7 @@ export default function Pricing() {
 
   if (loading) {
     return (
-      <section id="pricing" className="py-20 px-5 bg-light">
+      <section id="pricing" className="py-20 bg-light">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="section-title">{t("title")}</h2>
           <p className="section-subtitle">{t("subtitle")}</p>
@@ -72,8 +72,8 @@ export default function Pricing() {
   }
 
   return (
-    <section id="pricing" className="py-20 px-5 bg-light">
-      <div className="max-w-7xl mx-auto">
+    <section id="pricing" className="py-20 bg-light">
+      <div className="container">
         <h2 className="section-title">{t("title")}</h2>
         <p className="section-subtitle">{t("subtitle")}</p>
 

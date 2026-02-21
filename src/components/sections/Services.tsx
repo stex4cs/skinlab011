@@ -17,8 +17,8 @@ export default function Services() {
   const t = useTranslations("services");
 
   return (
-    <section id="services" className="py-20 px-5 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section id="services" className="py-20 bg-white">
+      <div className="container">
         <h2 className="section-title">{t("title")}</h2>
         <p className="section-subtitle">{t("subtitle")}</p>
 

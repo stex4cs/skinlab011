@@ -36,8 +36,8 @@ export default function Gallery() {
     : beforeAfterItems.filter((item) => item.category === activeFilter);
 
   return (
-    <section id="gallery" className="py-20 px-5 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section id="gallery" className="py-20 bg-white">
+      <div className="container">
         <h2 className="section-title">{t("title")}</h2>
         <p className="section-subtitle">{t("subtitle")}</p>
 
