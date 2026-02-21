@@ -26,35 +26,38 @@ export default function Contact() {
           />
         </div>
 
-        {/* Contact Info */}
-        <div className="grid md:grid-cols-3 gap-8 mt-20">
+        {/* Contact Info – 4 cards in 2×2 grid */}
+        <div className="grid md:grid-cols-4 gap-6 mt-28">
+
+          {/* Address */}
           <div
-            className="rounded-2xl p-10 text-center shadow-sm"
+            className="rounded-2xl p-8 text-center shadow-sm"
             style={{ background: "var(--color-light)" }}
           >
             <div
-              className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
+              className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
               style={{ background: "var(--color-secondary)" }}
             >
-              <MapPin style={{ color: "var(--color-primary)" }} size={26} />
+              <MapPin style={{ color: "var(--color-primary)" }} size={22} />
             </div>
-            <h4 className="font-heading text-xl font-semibold mb-3">
+            <h4 className="font-heading text-lg font-semibold mb-2">
               {t("info.addressTitle")}
             </h4>
             <p className="text-dark/60 text-sm leading-relaxed">{t("address")}</p>
           </div>
 
+          {/* Phone */}
           <div
-            className="rounded-2xl p-10 text-center shadow-sm"
+            className="rounded-2xl p-8 text-center shadow-sm"
             style={{ background: "var(--color-light)" }}
           >
             <div
-              className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
+              className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
               style={{ background: "var(--color-secondary)" }}
             >
-              <Phone style={{ color: "var(--color-primary)" }} size={26} />
+              <Phone style={{ color: "var(--color-primary)" }} size={22} />
             </div>
-            <h4 className="font-heading text-xl font-semibold mb-3">
+            <h4 className="font-heading text-lg font-semibold mb-2">
               {t("info.phoneTitle")}
             </h4>
             <a
@@ -66,17 +69,18 @@ export default function Contact() {
             <p className="text-dark/40 text-xs">{t("info.hours")}</p>
           </div>
 
+          {/* Email */}
           <div
-            className="rounded-2xl p-10 text-center shadow-sm"
+            className="rounded-2xl p-8 text-center shadow-sm"
             style={{ background: "var(--color-light)" }}
           >
             <div
-              className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
+              className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
               style={{ background: "var(--color-secondary)" }}
             >
-              <Mail style={{ color: "var(--color-primary)" }} size={26} />
+              <Mail style={{ color: "var(--color-primary)" }} size={22} />
             </div>
-            <h4 className="font-heading text-xl font-semibold mb-3">
+            <h4 className="font-heading text-lg font-semibold mb-2">
               {t("info.emailTitle")}
             </h4>
             <a
@@ -87,6 +91,41 @@ export default function Contact() {
             </a>
             <p className="text-dark/40 text-xs">{t("info.response")}</p>
           </div>
+
+          {/* Instagram */}
+          <a
+            href="https://www.instagram.com/skinlab011"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-2xl p-8 text-center no-underline block group"
+            style={{
+              background: "linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
+            }}
+          >
+            <div
+              className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
+              style={{ background: "rgba(255,255,255,0.2)" }}
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.5" fill="white" stroke="none"/>
+              </svg>
+            </div>
+            <h4
+              className="font-heading text-lg font-semibold mb-2"
+              style={{ color: "white" }}
+            >
+              {t("info.instagramTitle")}
+            </h4>
+            <p
+              className="text-sm font-medium"
+              style={{ color: "rgba(255,255,255,0.85)", letterSpacing: "0.5px" }}
+            >
+              @skinlab011
+            </p>
+          </a>
+
         </div>
       </div>
     </section>
