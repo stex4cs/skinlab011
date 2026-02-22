@@ -27,6 +27,10 @@ export default function BookingsCalendarPage() {
   const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
+  // Reason state for reject/cancel
+  const [pendingAction, setPendingAction] = useState<"rejected" | "cancelled" | null>(null);
+  const [reason, setReason] = useState("");
+
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
@@ -43,11 +47,11 @@ export default function BookingsCalendarPage() {
       });
   }, []);
 
-  async function updateStatus(bookingId: string, status: string) {
+  async function updateStatus(bookingId: string, status: string, statusReason?: string) {
     await fetch(`/api/bookings/${bookingId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status }),
+      body: JSON.stringify({ status, reason: statusReason }),
     });
     setBookings((prev) =>
       prev.map((b) =>
@@ -57,6 +61,24 @@ export default function BookingsCalendarPage() {
     if (selected?.booking_id === bookingId) {
       setSelected((s) => s ? { ...s, status: status as Booking["status"] } : null);
     }
+    setPendingAction(null);
+    setReason("");
+  }
+
+  function startAction(action: "rejected" | "cancelled") {
+    setPendingAction(action);
+    setReason("");
+  }
+
+  function cancelAction() {
+    setPendingAction(null);
+    setReason("");
+  }
+
+  function closeModal() {
+    setSelected(null);
+    setPendingAction(null);
+    setReason("");
   }
 
   const events = bookings.map((b) => ({
@@ -76,6 +98,12 @@ export default function BookingsCalendarPage() {
   const uniqueLegend = categoryColors.filter(
     (v, i, a) => a.findIndex((t) => t.color === v.color) === i
   );
+
+  const actionLabel = pendingAction === "rejected" ? t("actions.reject") : t("actions.cancel");
+  const actionColor = pendingAction === "rejected" ? "#EF5350" : "#FF7043";
+  const reasonPlaceholder = pendingAction === "rejected"
+    ? "Npr. termin je zauzet, molimo kontaktirajte nas..."
+    : "Npr. hitna situacija, molimo kontaktirajte nas...";
 
   return (
     <div className="p-4 md:p-8">
@@ -148,6 +176,8 @@ export default function BookingsCalendarPage() {
             events={events}
             eventClick={(info) => {
               setSelected(info.event.extendedProps.booking);
+              setPendingAction(null);
+              setReason("");
             }}
             height="auto"
             locale="sr"
@@ -160,7 +190,7 @@ export default function BookingsCalendarPage() {
         <div
           className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-4"
           style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(4px)" }}
-          onClick={() => setSelected(null)}
+          onClick={closeModal}
         >
           <div
             className="w-full md:max-w-md rounded-t-2xl md:rounded-2xl p-6 md:p-8"
@@ -175,10 +205,7 @@ export default function BookingsCalendarPage() {
           >
             {/* Drag handle (mobile) */}
             <div className="md:hidden flex justify-center mb-4">
-              <div
-                className="w-10 h-1 rounded-full"
-                style={{ background: "rgba(255,255,255,0.2)" }}
-              />
+              <div className="w-10 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.2)" }} />
             </div>
 
             <h2 className="font-heading text-xl md:text-2xl mb-1" style={{ color: TEXT }}>
@@ -218,42 +245,94 @@ export default function BookingsCalendarPage() {
               </div>
             </div>
 
-            <div className="flex gap-3">
-              {selected.status === "pending" && (
-                <>
-                  <button
-                    onClick={() => updateStatus(selected.booking_id, "confirmed")}
-                    className="flex-1 py-3 rounded-xl border-none cursor-pointer font-medium text-sm"
-                    style={{ background: "rgba(102,187,106,0.15)", color: "#66BB6A", border: "1px solid rgba(102,187,106,0.3)" }}
-                  >
-                    {t("actions.confirm")}
-                  </button>
-                  <button
-                    onClick={() => updateStatus(selected.booking_id, "rejected")}
-                    className="flex-1 py-3 rounded-xl border-none cursor-pointer font-medium text-sm"
-                    style={{ background: "rgba(239,83,80,0.15)", color: "#EF5350", border: "1px solid rgba(239,83,80,0.3)" }}
-                  >
-                    {t("actions.reject")}
-                  </button>
-                </>
-              )}
-              {selected.status === "confirmed" && (
-                <button
-                  onClick={() => updateStatus(selected.booking_id, "cancelled")}
-                  className="flex-1 py-3 rounded-xl border-none cursor-pointer font-medium text-sm"
-                  style={{ background: "rgba(255,255,255,0.07)", color: TEXT_MUTED, border: "1px solid rgba(255,255,255,0.12)" }}
+            {/* Reason input (shown when reject/cancel is clicked) */}
+            {pendingAction && (
+              <div className="mb-4">
+                <div
+                  className="rounded-xl p-4 mb-3"
+                  style={{ background: `${actionColor}12`, border: `1px solid ${actionColor}30` }}
                 >
-                  {t("actions.cancel")}
+                  <p className="text-xs mb-2 font-medium" style={{ color: actionColor }}>
+                    {actionLabel} — unesite razlog (opciono)
+                  </p>
+                  <textarea
+                    value={reason}
+                    onChange={(e) => setReason(e.target.value)}
+                    placeholder={reasonPlaceholder}
+                    rows={3}
+                    className="w-full rounded-lg px-3 py-2 text-sm outline-none resize-none"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                      color: TEXT,
+                      fontFamily: "inherit",
+                    }}
+                    onFocus={(e) => { e.target.style.borderColor = actionColor; }}
+                    onBlur={(e) => { e.target.style.borderColor = "rgba(255,255,255,0.1)"; }}
+                    autoFocus
+                  />
+                  <p className="text-xs mt-1.5" style={{ color: TEXT_MUTED }}>
+                    Razlog će biti uključen u email koji se šalje klijentu.
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => updateStatus(selected.booking_id, pendingAction, reason || undefined)}
+                    className="flex-1 py-3 rounded-xl border-none cursor-pointer font-medium text-sm"
+                    style={{ background: `${actionColor}22`, color: actionColor, border: `1px solid ${actionColor}44` }}
+                  >
+                    Potvrdi {actionLabel.toLowerCase()}
+                  </button>
+                  <button
+                    onClick={cancelAction}
+                    className="py-3 px-4 rounded-xl border-none cursor-pointer text-sm"
+                    style={{ background: "rgba(255,255,255,0.05)", color: TEXT_MUTED, border: "1px solid rgba(255,255,255,0.08)" }}
+                  >
+                    Odustani
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Action buttons (hidden when reason form is shown) */}
+            {!pendingAction && (
+              <div className="flex gap-3">
+                {selected.status === "pending" && (
+                  <>
+                    <button
+                      onClick={() => updateStatus(selected.booking_id, "confirmed")}
+                      className="flex-1 py-3 rounded-xl border-none cursor-pointer font-medium text-sm"
+                      style={{ background: "rgba(102,187,106,0.15)", color: "#66BB6A", border: "1px solid rgba(102,187,106,0.3)" }}
+                    >
+                      {t("actions.confirm")}
+                    </button>
+                    <button
+                      onClick={() => startAction("rejected")}
+                      className="flex-1 py-3 rounded-xl border-none cursor-pointer font-medium text-sm"
+                      style={{ background: "rgba(239,83,80,0.15)", color: "#EF5350", border: "1px solid rgba(239,83,80,0.3)" }}
+                    >
+                      {t("actions.reject")}
+                    </button>
+                  </>
+                )}
+                {selected.status === "confirmed" && (
+                  <button
+                    onClick={() => startAction("cancelled")}
+                    className="flex-1 py-3 rounded-xl border-none cursor-pointer font-medium text-sm"
+                    style={{ background: "rgba(255,112,67,0.12)", color: "#FF7043", border: "1px solid rgba(255,112,67,0.3)" }}
+                  >
+                    {t("actions.cancel")}
+                  </button>
+                )}
+                <button
+                  onClick={closeModal}
+                  className="flex-1 py-3 rounded-xl border-none cursor-pointer font-medium text-sm"
+                  style={{ background: "rgba(255,255,255,0.05)", color: TEXT_MUTED, border: "1px solid rgba(255,255,255,0.08)" }}
+                >
+                  Zatvori
                 </button>
-              )}
-              <button
-                onClick={() => setSelected(null)}
-                className="flex-1 py-3 rounded-xl border-none cursor-pointer font-medium text-sm"
-                style={{ background: "rgba(255,255,255,0.05)", color: TEXT_MUTED, border: "1px solid rgba(255,255,255,0.08)" }}
-              >
-                Zatvori
-              </button>
-            </div>
+              </div>
+            )}
           </div>
         </div>
       )}

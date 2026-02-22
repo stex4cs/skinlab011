@@ -14,7 +14,7 @@ export async function PATCH(
   }
 
   const { id } = await params;
-  const { status } = await req.json();
+  const { status, reason } = await req.json();
 
   if (!["confirmed", "rejected", "cancelled", "pending"].includes(status)) {
     return NextResponse.json({ error: "Invalid status" }, { status: 400 });
@@ -42,8 +42,8 @@ export async function PATCH(
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  // Send email notification for confirmed/rejected
-  if (status === "confirmed" || status === "rejected") {
+  // Send email notification for confirmed/rejected/cancelled
+  if (status === "confirmed" || status === "rejected" || status === "cancelled") {
     try {
       await sendBookingStatusEmail(
         booking.client_email,
@@ -51,7 +51,9 @@ export async function PATCH(
         booking.treatment_name,
         booking.booking_date,
         booking.booking_time,
-        status
+        status,
+        id,
+        reason || undefined
       );
     } catch (e) {
       console.error("Email error:", e);
