@@ -121,6 +121,18 @@ section {
   font-weight: 500;
 }
 
+/* Lang switcher inside dark mobile menu */
+.mobile-menu-lang .lang-btn {
+  color: rgba(255, 255, 255, 0.75);
+  border-color: rgba(212, 175, 120, 0.45);
+}
+
+.mobile-menu-lang .lang-btn:hover,
+.mobile-menu-lang .lang-btn.active {
+  background: var(--color-primary);
+  color: white;
+}
+
 .lang-btn:hover,
 .lang-btn.active {
   background: var(--color-primary);
