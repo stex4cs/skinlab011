@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { TIME_SLOTS, BUSINESS_HOURS } from "@/lib/constants";
+import { BUSINESS_HOURS, generateTimeSlots, timeToMinutes } from "@/lib/constants";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const date = searchParams.get("date");
+  const durationParam = searchParams.get("duration");
+  const duration = durationParam ? parseInt(durationParam) : 60;
 
   if (!date) {
     return NextResponse.json({ error: "Date is required" }, { status: 400 });
@@ -20,28 +22,42 @@ export async function GET(req: NextRequest) {
 
   const supabase = createAdminClient();
 
+  // Fetch existing bookings WITH their durations for proper overlap detection
   const { data: bookings } = await supabase
     .from("bookings")
-    .select("booking_time")
+    .select("booking_time, duration_minutes")
     .eq("booking_date", date)
     .in("status", ["pending", "confirmed"]);
 
-  const bookedSlots = bookings?.map((b) => b.booking_time.slice(0, 5)) || [];
+  const openMinutes = timeToMinutes(hours.open);
+  const closeMinutes = timeToMinutes(hours.close);
 
-  // Filter slots within business hours
-  const [openH, openM] = hours.open.split(":").map(Number);
-  const [closeH, closeM] = hours.close.split(":").map(Number);
-  const openMinutes = openH * 60 + openM;
-  const closeMinutes = closeH * 60 + closeM;
+  // Generate all valid start slots for this treatment duration
+  const allSlots = generateTimeSlots(openMinutes, closeMinutes, duration);
 
-  const availableSlots = TIME_SLOTS.filter((slot) => {
-    const [h, m] = slot.split(":").map(Number);
-    const slotMinutes = h * 60 + m;
-    return slotMinutes >= openMinutes && slotMinutes < closeMinutes;
-  });
+  // For each slot, check if it overlaps with any existing booking
+  // Overlap: [slotStart, slotStart+duration) overlaps [bStart, bStart+bDuration)
+  // True when: slotStart < bEnd AND slotEnd > bStart
+  const bookedSlots: string[] = [];
+
+  for (const slot of allSlots) {
+    const slotStart = timeToMinutes(slot);
+    const slotEnd = slotStart + duration;
+
+    const hasConflict = bookings?.some((b) => {
+      const bStart = timeToMinutes(b.booking_time.slice(0, 5));
+      const bDuration = b.duration_minutes || 60; // default 60 if not stored
+      const bEnd = bStart + bDuration;
+      return slotStart < bEnd && slotEnd > bStart;
+    }) ?? false;
+
+    if (hasConflict) {
+      bookedSlots.push(slot);
+    }
+  }
 
   return NextResponse.json({
-    slots: availableSlots,
+    slots: allSlots,
     bookedSlots,
     closed: false,
     hours,

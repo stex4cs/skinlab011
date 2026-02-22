@@ -26,9 +26,28 @@ export const BUSINESS_HOURS = {
   sun: null,
 };
 
-export const TIME_SLOTS = [
-  "09:00", "10:00", "11:00", "12:00", "13:00",
-  "14:00", "15:00", "16:00", "17:00", "18:00", "19:00",
-];
+// Slot grid interval in minutes (15 = fine-grained, works for all treatment durations)
+export const SLOT_INTERVAL_MINUTES = 15;
+
+// Generate all possible start slots within [openMinutes, closeMinutes)
+// where the treatment fits (slotStart + duration <= closeMinutes)
+export function generateTimeSlots(
+  openMinutes: number,
+  closeMinutes: number,
+  durationMinutes: number
+): string[] {
+  const slots: string[] = [];
+  for (let m = openMinutes; m + durationMinutes <= closeMinutes; m += SLOT_INTERVAL_MINUTES) {
+    const h = Math.floor(m / 60);
+    const min = m % 60;
+    slots.push(`${String(h).padStart(2, "0")}:${String(min).padStart(2, "0")}`);
+  }
+  return slots;
+}
+
+export function timeToMinutes(time: string): number {
+  const [h, m] = time.split(":").map(Number);
+  return h * 60 + m;
+}
 
 export const WHATSAPP_URL = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "381611576793"}`;

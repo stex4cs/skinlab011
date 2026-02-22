@@ -46,7 +46,7 @@ export default function BookingCalendar() {
 
   const [step, setStep] = useState(1);
   const [categories, setCategories] = useState<CategoryWithTreatments[]>([]);
-  const [selectedTreatment, setSelectedTreatment] = useState<{ id: string; name: string; price: string; categoryColor: string } | null>(null);
+  const [selectedTreatment, setSelectedTreatment] = useState<{ id: string; name: string; price: string; categoryColor: string; duration: number } | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [availability, setAvailability] = useState<AvailabilityData | null>(null);
@@ -77,9 +77,10 @@ export default function BookingCalendar() {
   useEffect(() => {
     if (!selectedDate) return;
     const dateStr = selectedDate.toLocaleDateString("sv");
+    const duration = selectedTreatment?.duration || 60;
     setLoadingSlots(true);
     setSelectedTime(null);
-    fetch(`/api/bookings/available?date=${dateStr}`)
+    fetch(`/api/bookings/available?date=${dateStr}&duration=${duration}`)
       .then((r) => r.json())
       .then((data) => { setAvailability(data); setLoadingSlots(false); });
   }, [selectedDate]);
@@ -112,7 +113,8 @@ export default function BookingCalendar() {
         if (res.status === 409) {
           setStep(3); setSelectedTime(null);
           if (selectedDate) {
-            fetch(`/api/bookings/available?date=${selectedDate.toLocaleDateString("sv")}`)
+            const dur = selectedTreatment?.duration || 60;
+            fetch(`/api/bookings/available?date=${selectedDate.toLocaleDateString("sv")}&duration=${dur}`)
               .then((r) => r.json()).then(setAvailability);
           }
         }
@@ -250,7 +252,7 @@ export default function BookingCalendar() {
                           <button
                             key={tr.id}
                             onClick={() => {
-                              setSelectedTreatment({ id: tr.id, name: getLocalizedName(tr, locale), price: tr.price, categoryColor: cat.color });
+                              setSelectedTreatment({ id: tr.id, name: getLocalizedName(tr, locale), price: tr.price, categoryColor: cat.color, duration: tr.duration_minutes || 60 });
                               setStep(2);
                             }}
                             className="w-full flex items-center justify-between px-5 py-3.5 bg-transparent border-none cursor-pointer text-left group"
