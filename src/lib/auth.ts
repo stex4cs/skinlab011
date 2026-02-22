@@ -4,6 +4,17 @@ import { createAdminClient } from "./supabase/admin";
 
 export const authOptions: NextAuthOptions = {
   debug: true,
+  logger: {
+    error(code, metadata) {
+      console.error("[AUTH ERROR]", code, JSON.stringify(metadata));
+    },
+    warn(code) {
+      console.warn("[AUTH WARN]", code);
+    },
+    debug(code, metadata) {
+      console.log("[AUTH DEBUG]", code, JSON.stringify(metadata));
+    },
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -49,6 +60,26 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/me/admin",
     error: "/me/admin",
+  },
+  cookies: {
+    pkceCodeVerifier: {
+      name: "next-auth.pkce.code_verifier",
+      options: {
+        httpOnly: true,
+        sameSite: "none",
+        path: "/",
+        secure: true,
+      },
+    },
+    state: {
+      name: "next-auth.state",
+      options: {
+        httpOnly: true,
+        sameSite: "none",
+        path: "/",
+        secure: true,
+      },
+    },
   },
   events: {
     async signIn(message) {
