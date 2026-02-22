@@ -8,7 +8,9 @@ function getResend() {
   return new Resend(process.env.RESEND_API_KEY);
 }
 
-const FROM = "SkinLab 011 <onboarding@resend.dev>";
+// RESEND_FROM should be set to verified domain email, e.g. "SkinLab 011 <noreply@skinlab011.com>"
+// Until domain is verified, use onboarding@resend.dev (only sends to Resend account owner)
+const FROM = process.env.RESEND_FROM || "SkinLab 011 <onboarding@resend.dev>";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "skinlab011@gmail.com";
 const ADDRESS = "Ul Baku 9A, Podgorica";
 const SITE_URL = process.env.NEXTAUTH_URL || "https://skinlab011.vercel.app";

@@ -5,9 +5,12 @@ export async function GET() {
   const apiKey = process.env.RESEND_API_KEY;
   const adminEmail = process.env.ADMIN_EMAIL || "skinlab011@gmail.com";
 
+  const fromAddress = process.env.RESEND_FROM || "SkinLab 011 <onboarding@resend.dev>";
+
   // Check env vars
   const envStatus = {
     RESEND_API_KEY: apiKey ? `✓ Set (starts with: ${apiKey.slice(0, 6)}...)` : "✗ NOT SET",
+    RESEND_FROM: fromAddress,
     ADMIN_EMAIL: adminEmail,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL || "not set",
   };
@@ -25,7 +28,7 @@ export async function GET() {
   const resend = new Resend(apiKey);
   try {
     const { data, error } = await resend.emails.send({
-      from: "SkinLab 011 <onboarding@resend.dev>",
+      from: fromAddress,
       to: adminEmail,
       subject: "✓ Test email - SkinLab 011 email radi!",
       html: `
