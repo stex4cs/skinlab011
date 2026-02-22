@@ -203,13 +203,11 @@ function AdminContent({ children }: { children: React.ReactNode }) {
 
       {/* Sidebar - desktop: static, mobile: fixed drawer */}
       <aside
-        className="fixed md:static inset-y-0 left-0 z-40 w-64 flex flex-col min-h-screen overflow-y-auto"
+        className={`fixed md:static inset-y-0 left-0 z-40 w-64 flex flex-col min-h-screen overflow-y-auto transition-transform duration-300 ease-in-out ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
         style={{
           background: SIDEBAR_BG,
           borderRight: `1px solid ${SIDEBAR_BORDER}`,
-          boxShadow: sidebarOpen ? "8px 0 32px rgba(0,0,0,0.5)" : "4px 0 24px rgba(0,0,0,0.3)",
-          transform: sidebarOpen ? "translateX(0)" : "translateX(-100%)",
-          transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+          boxShadow: "4px 0 24px rgba(0,0,0,0.3)",
         }}
       >
         <SidebarContent />
