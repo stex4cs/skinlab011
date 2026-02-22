@@ -293,21 +293,76 @@ section {
   animation: pulse 2s infinite;
 }
 
-/* FullCalendar admin overrides */
+/* FullCalendar dark mode overrides */
 .fc .fc-toolbar-title {
   font-family: var(--font-heading);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.1rem;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th,
+.fc-theme-standard .fc-scrollgrid {
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+}
+
+.fc .fc-daygrid-day:hover .fc-daygrid-day-number {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .fc .fc-button-primary {
-  background-color: var(--color-primary) !important;
-  border-color: var(--color-primary) !important;
+  background: rgba(212, 175, 120, 0.15) !important;
+  border: 1px solid rgba(212, 175, 120, 0.3) !important;
+  color: #D4AF78 !important;
+  font-size: 0.8rem;
+  border-radius: 8px !important;
+  box-shadow: none !important;
 }
 
 .fc .fc-button-primary:hover {
-  background-color: var(--color-accent) !important;
-  border-color: var(--color-accent) !important;
+  background: rgba(212, 175, 120, 0.25) !important;
+  border-color: rgba(212, 175, 120, 0.5) !important;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+  background: rgba(212, 175, 120, 0.3) !important;
+  border-color: rgba(212, 175, 120, 0.6) !important;
+  color: #D4AF78 !important;
 }
 
 .fc .fc-day-today {
-  background-color: rgba(212, 175, 120, 0.1) !important;
+  background-color: rgba(212, 175, 120, 0.08) !important;
+}
+
+.fc .fc-day-today .fc-daygrid-day-number {
+  color: #D4AF78;
+  font-weight: 600;
+}
+
+.fc .fc-event {
+  border-radius: 6px !important;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+
+.fc .fc-timegrid-slot {
+  border-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+.fc .fc-timegrid-axis {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.fc .fc-more-link {
+  color: #D4AF78;
+  font-size: 0.75rem;
 }
