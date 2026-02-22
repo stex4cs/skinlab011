@@ -213,9 +213,6 @@ function AdminContent({ children }: { children: React.ReactNode }) {
         <SidebarContent />
       </aside>
 
-      {/* Desktop sidebar spacer */}
-      <div className="hidden md:block w-64 flex-shrink-0" />
-
       {/* Main */}
       <main className="flex-1 overflow-auto min-w-0">
 
