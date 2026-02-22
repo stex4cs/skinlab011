@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { X, Instagram } from "lucide-react";
+import { X } from "lucide-react";
 
 const filterKeys = ["all", "facial", "body", "nails", "brows", "laser"] as const;
 
@@ -109,25 +109,6 @@ export default function Gallery() {
           ))}
         </div>
 
-        {/* Instagram */}
-        <div className="mt-16 text-center">
-          <h3 className="font-heading text-2xl font-semibold mb-2">
-            {t("instagram.title")}
-          </h3>
-          <p className="text-primary font-medium mb-6">{t("instagram.handle")}</p>
-          <a
-            href="https://instagram.com/skinlab011"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-white font-semibold text-sm no-underline hover:scale-105 transition-transform"
-            style={{
-              background: "linear-gradient(135deg, #833AB4, #FD1D1D, #F77737)",
-            }}
-          >
-            <Instagram size={20} />
-            {t("instagram.button")}
-          </a>
-        </div>
 
         {/* Lightbox */}
         {lightbox && (

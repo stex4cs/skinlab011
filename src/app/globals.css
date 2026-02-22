@@ -47,6 +47,11 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 5%;
 }
 
+/* Guarantee generous bottom padding on all content sections */
+section {
+  padding-bottom: 8rem;
+}
+
 /* Section styles - matching original design */
 .section-title {
   font-family: var(--font-heading);
