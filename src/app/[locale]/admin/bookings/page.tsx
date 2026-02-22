@@ -20,6 +20,45 @@ interface BookingWithCategory extends Booking {
   treatment_categories?: { color: string; name_me: string };
 }
 
+interface RevenueData {
+  today: { amount: number; count: number };
+  week: { amount: number; count: number };
+  month: { amount: number; count: number };
+  total: { amount: number; count: number };
+}
+
+interface TreatmentOption {
+  id: string;
+  name_me: string;
+  duration_minutes: number;
+}
+
+interface CategoryOption {
+  id: string;
+  name_me: string;
+  color: string;
+  treatments: TreatmentOption[];
+}
+
+// Generate 15-min time slots 09:00 – 19:45
+function buildTimeOptions(): string[] {
+  const slots: string[] = [];
+  for (let m = 9 * 60; m < 20 * 60; m += 15) {
+    const h = Math.floor(m / 60);
+    const min = m % 60;
+    slots.push(`${String(h).padStart(2, "0")}:${String(min).padStart(2, "0")}`);
+  }
+  return slots;
+}
+const TIME_OPTIONS = buildTimeOptions();
+
+const inputStyle = {
+  background: "rgba(255,255,255,0.05)",
+  border: "1px solid rgba(255,255,255,0.1)",
+  color: TEXT,
+  fontFamily: "inherit",
+} as const;
+
 export default function BookingsCalendarPage() {
   const t = useTranslations("admin");
   const [bookings, setBookings] = useState<BookingWithCategory[]>([]);
@@ -27,9 +66,27 @@ export default function BookingsCalendarPage() {
   const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Reason state for reject/cancel
+  // Reject / cancel reason
   const [pendingAction, setPendingAction] = useState<"rejected" | "cancelled" | null>(null);
   const [reason, setReason] = useState("");
+
+  // Revenue
+  const [revenue, setRevenue] = useState<RevenueData | null>(null);
+
+  // Add event
+  const [categories, setCategories] = useState<CategoryOption[]>([]);
+  const [addModal, setAddModal] = useState(false);
+  const [addForm, setAddForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    treatmentId: "",
+    date: "",
+    time: "09:00",
+    message: "",
+  });
+  const [addLoading, setAddLoading] = useState(false);
+  const [addError, setAddError] = useState("");
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -47,6 +104,27 @@ export default function BookingsCalendarPage() {
       });
   }, []);
 
+  useEffect(() => {
+    fetch("/api/admin/revenue")
+      .then((r) => r.json())
+      .then((d) => { if (!d.error) setRevenue(d); });
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/treatments")
+      .then((r) => r.json())
+      .then((d) => setCategories(Array.isArray(d) ? d : []));
+  }, []);
+
+  function reloadData() {
+    fetch("/api/bookings?limit=200")
+      .then((r) => r.json())
+      .then((d) => setBookings(Array.isArray(d) ? d : []));
+    fetch("/api/admin/revenue")
+      .then((r) => r.json())
+      .then((d) => { if (!d.error) setRevenue(d); });
+  }
+
   async function updateStatus(bookingId: string, status: string, statusReason?: string) {
     await fetch(`/api/bookings/${bookingId}`, {
       method: "PATCH",
@@ -63,6 +141,8 @@ export default function BookingsCalendarPage() {
     }
     setPendingAction(null);
     setReason("");
+    // Refresh revenue in case of cancellation
+    fetch("/api/admin/revenue").then((r) => r.json()).then((d) => { if (!d.error) setRevenue(d); });
   }
 
   function startAction(action: "rejected" | "cancelled") {
@@ -79,6 +159,47 @@ export default function BookingsCalendarPage() {
     setSelected(null);
     setPendingAction(null);
     setReason("");
+  }
+
+  function openAddModal(date?: string, time?: string) {
+    setAddForm({
+      name: "",
+      email: "",
+      phone: "",
+      treatmentId: "",
+      date: date || "",
+      time: time || "09:00",
+      message: "",
+    });
+    setAddError("");
+    setAddModal(true);
+  }
+
+  async function submitAddEvent() {
+    if (!addForm.name || !addForm.treatmentId || !addForm.date || !addForm.time) {
+      setAddError("Molimo popunite: ime klijenta, tretman, datum i vrijeme.");
+      return;
+    }
+    setAddLoading(true);
+    setAddError("");
+    try {
+      const res = await fetch("/api/admin/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(addForm),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setAddModal(false);
+        reloadData();
+      } else {
+        setAddError(data.error || "Greška pri dodavanju termina.");
+      }
+    } catch {
+      setAddError("Greška pri dodavanju termina.");
+    } finally {
+      setAddLoading(false);
+    }
   }
 
   const events = bookings.map((b) => ({
@@ -105,14 +226,51 @@ export default function BookingsCalendarPage() {
     ? "Npr. termin je zauzet, molimo kontaktirajte nas..."
     : "Npr. hitna situacija, molimo kontaktirajte nas...";
 
+  const revenueCards = [
+    { label: "Danas", key: "today" as const },
+    { label: "Sedmica", key: "week" as const },
+    { label: "Mjesec", key: "month" as const },
+    { label: "Ukupno", key: "total" as const },
+  ];
+
   return (
     <div className="p-4 md:p-8">
       {/* Header */}
-      <div className="mb-4 md:mb-6">
-        <h1 className="font-heading text-2xl md:text-3xl mb-1" style={{ color: TEXT }}>
-          {t("bookings")}
-        </h1>
-        <div style={{ height: "2px", width: "48px", background: `linear-gradient(to right, ${GOLD}, transparent)`, marginTop: "8px" }} />
+      <div className="mb-4 md:mb-6 flex items-start justify-between gap-4">
+        <div>
+          <h1 className="font-heading text-2xl md:text-3xl mb-1" style={{ color: TEXT }}>
+            {t("bookings")}
+          </h1>
+          <div style={{ height: "2px", width: "48px", background: `linear-gradient(to right, ${GOLD}, transparent)`, marginTop: "8px" }} />
+        </div>
+        <button
+          onClick={() => openAddModal()}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium flex-shrink-0"
+          style={{ background: `${GOLD}22`, color: GOLD, border: `1px solid ${GOLD}44`, cursor: "pointer" }}
+        >
+          <span style={{ fontSize: "1.1rem", lineHeight: 1 }}>+</span>
+          <span className="hidden md:inline">Dodaj termin</span>
+          <span className="md:hidden">Dodaj</span>
+        </button>
+      </div>
+
+      {/* Revenue Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4 md:mb-6">
+        {revenueCards.map(({ label, key }) => (
+          <div
+            key={key}
+            className="rounded-xl p-3 md:p-4"
+            style={{ background: CARD, border: `1px solid ${CARD_BORDER}` }}
+          >
+            <p className="text-xs mb-2" style={{ color: TEXT_MUTED }}>{label}</p>
+            <p className="text-lg md:text-xl font-semibold" style={{ color: GOLD }}>
+              {revenue ? `${revenue[key].amount.toFixed(0)}€` : "—"}
+            </p>
+            <p className="text-xs mt-0.5" style={{ color: TEXT_MUTED }}>
+              {revenue ? `${revenue[key].count} rezerv.` : ""}
+            </p>
+          </div>
+        ))}
       </div>
 
       {/* Legend - scrollable on mobile */}
@@ -183,6 +341,19 @@ export default function BookingsCalendarPage() {
               listMonth: { buttonText: "Mjesec" },
               timeGridWeek: { buttonText: "Sedmica" },
               timeGridDay: { buttonText: "Dan" },
+            }}
+            selectable
+            dateClick={(info) => {
+              const hasTime = info.dateStr.includes("T");
+              const dateStr = info.dateStr.split("T")[0];
+              const rawTime = hasTime ? info.dateStr.split("T")[1].slice(0, 5) : "09:00";
+              // Round to nearest 15-min slot
+              const [hh, mm] = rawTime.split(":").map(Number);
+              const roundedMin = Math.round((hh * 60 + mm) / 15) * 15;
+              const rh = Math.floor(roundedMin / 60) % 24;
+              const rm = roundedMin % 60;
+              const timeStr = `${String(rh).padStart(2, "0")}:${String(rm).padStart(2, "0")}`;
+              openAddModal(dateStr, timeStr);
             }}
             events={events}
             eventClick={(info) => {
@@ -344,6 +515,173 @@ export default function BookingsCalendarPage() {
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Add Event Modal */}
+      {addModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-4"
+          style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(4px)" }}
+          onClick={() => !addLoading && setAddModal(false)}
+        >
+          <div
+            className="w-full md:max-w-md rounded-t-2xl md:rounded-2xl p-6 md:p-8"
+            style={{
+              background: "#1E1E2E",
+              border: "1px solid rgba(212,175,120,0.2)",
+              boxShadow: "0 -20px 60px rgba(0,0,0,0.5)",
+              maxHeight: "90vh",
+              overflowY: "auto",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Drag handle (mobile) */}
+            <div className="md:hidden flex justify-center mb-4">
+              <div className="w-10 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.2)" }} />
+            </div>
+
+            <h2 className="font-heading text-xl mb-1" style={{ color: TEXT }}>Dodaj termin</h2>
+            <p className="text-sm mb-5" style={{ color: TEXT_MUTED }}>Direktno zakazivanje (status: potvrđeno)</p>
+
+            <div style={{ height: "1px", background: "rgba(255,255,255,0.06)", marginBottom: "1.25rem" }} />
+
+            <div className="space-y-4">
+              {/* Treatment */}
+              <div>
+                <label className="block text-xs mb-1.5 font-medium" style={{ color: TEXT_MUTED }}>
+                  Tretman *
+                </label>
+                <select
+                  value={addForm.treatmentId}
+                  onChange={(e) => setAddForm((f) => ({ ...f, treatmentId: e.target.value }))}
+                  className="w-full rounded-lg px-3 py-2.5 text-sm outline-none"
+                  style={{ ...inputStyle, color: addForm.treatmentId ? TEXT : TEXT_MUTED }}
+                >
+                  <option value="">— Izaberite tretman —</option>
+                  {categories.map((cat) => (
+                    <optgroup key={cat.id} label={cat.name_me}>
+                      {cat.treatments?.map((tr) => (
+                        <option key={tr.id} value={tr.id}>
+                          {tr.name_me} ({tr.duration_minutes || 60} min)
+                        </option>
+                      ))}
+                    </optgroup>
+                  ))}
+                </select>
+              </div>
+
+              {/* Client name */}
+              <div>
+                <label className="block text-xs mb-1.5 font-medium" style={{ color: TEXT_MUTED }}>
+                  Ime klijenta *
+                </label>
+                <input
+                  type="text"
+                  value={addForm.name}
+                  onChange={(e) => setAddForm((f) => ({ ...f, name: e.target.value }))}
+                  placeholder="Ana Đurović"
+                  className="w-full rounded-lg px-3 py-2.5 text-sm outline-none"
+                  style={inputStyle}
+                />
+              </div>
+
+              {/* Email + Phone */}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs mb-1.5 font-medium" style={{ color: TEXT_MUTED }}>Email</label>
+                  <input
+                    type="email"
+                    value={addForm.email}
+                    onChange={(e) => setAddForm((f) => ({ ...f, email: e.target.value }))}
+                    placeholder="ana@email.com"
+                    className="w-full rounded-lg px-3 py-2.5 text-sm outline-none"
+                    style={inputStyle}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs mb-1.5 font-medium" style={{ color: TEXT_MUTED }}>Telefon</label>
+                  <input
+                    type="tel"
+                    value={addForm.phone}
+                    onChange={(e) => setAddForm((f) => ({ ...f, phone: e.target.value }))}
+                    placeholder="+382 67..."
+                    className="w-full rounded-lg px-3 py-2.5 text-sm outline-none"
+                    style={inputStyle}
+                  />
+                </div>
+              </div>
+
+              {/* Date + Time */}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs mb-1.5 font-medium" style={{ color: TEXT_MUTED }}>Datum *</label>
+                  <input
+                    type="date"
+                    value={addForm.date}
+                    onChange={(e) => setAddForm((f) => ({ ...f, date: e.target.value }))}
+                    className="w-full rounded-lg px-3 py-2.5 text-sm outline-none"
+                    style={{ ...inputStyle, colorScheme: "dark" }}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs mb-1.5 font-medium" style={{ color: TEXT_MUTED }}>Vrijeme *</label>
+                  <select
+                    value={addForm.time}
+                    onChange={(e) => setAddForm((f) => ({ ...f, time: e.target.value }))}
+                    className="w-full rounded-lg px-3 py-2.5 text-sm outline-none"
+                    style={inputStyle}
+                  >
+                    {TIME_OPTIONS.map((slot) => (
+                      <option key={slot} value={slot}>{slot}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Notes */}
+              <div>
+                <label className="block text-xs mb-1.5 font-medium" style={{ color: TEXT_MUTED }}>Napomena</label>
+                <textarea
+                  value={addForm.message}
+                  onChange={(e) => setAddForm((f) => ({ ...f, message: e.target.value }))}
+                  placeholder="Interna napomena..."
+                  rows={2}
+                  className="w-full rounded-lg px-3 py-2 text-sm outline-none resize-none"
+                  style={inputStyle}
+                />
+              </div>
+            </div>
+
+            {addError && (
+              <p className="text-xs mt-3" style={{ color: "#EF5350" }}>{addError}</p>
+            )}
+
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={submitAddEvent}
+                disabled={addLoading}
+                className="flex-1 py-3 rounded-xl border-none cursor-pointer font-medium text-sm"
+                style={{
+                  background: `${GOLD}22`,
+                  color: GOLD,
+                  border: `1px solid ${GOLD}44`,
+                  opacity: addLoading ? 0.6 : 1,
+                  cursor: addLoading ? "not-allowed" : "pointer",
+                }}
+              >
+                {addLoading ? "Dodavanje..." : "Dodaj termin"}
+              </button>
+              <button
+                onClick={() => setAddModal(false)}
+                disabled={addLoading}
+                className="py-3 px-5 rounded-xl border-none cursor-pointer text-sm"
+                style={{ background: "rgba(255,255,255,0.05)", color: TEXT_MUTED, border: "1px solid rgba(255,255,255,0.08)" }}
+              >
+                Odustani
+              </button>
+            </div>
           </div>
         </div>
       )}
