@@ -7,7 +7,7 @@ import Pricing from "@/components/sections/Pricing";
 import About from "@/components/sections/About";
 import Testimonials from "@/components/sections/Testimonials";
 import Gallery from "@/components/sections/Gallery";
-import BookingForm from "@/components/sections/BookingForm";
+import BookingCalendar from "@/components/sections/BookingCalendar";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
 
@@ -22,7 +22,7 @@ export default function Home() {
         <Pricing />
         <Testimonials />
         <Gallery />
-        <BookingForm />
+        <BookingCalendar />
         <FAQ />
         <Contact />
       </main>

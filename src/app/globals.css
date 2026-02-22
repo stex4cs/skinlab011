@@ -366,3 +366,78 @@ section {
   color: #D4AF78;
   font-size: 0.75rem;
 }
+
+/* ── react-day-picker (booking calendar) overrides ── */
+.rdp-root {
+  --rdp-accent-color: #D4AF78;
+  --rdp-accent-background-color: rgba(212, 175, 120, 0.15);
+  --rdp-day-height: 2.5rem;
+  --rdp-day-width: 2.5rem;
+  --rdp-day-font: 0.875rem;
+  --rdp-selected-border: none;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.rdp-month_caption {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--color-dark);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.rdp-weekdays .rdp-weekday {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: rgba(44, 44, 44, 0.4);
+  text-transform: uppercase;
+}
+
+.rdp-day_button {
+  border-radius: 50% !important;
+  font-size: 0.875rem;
+  color: var(--color-dark);
+  transition: all 0.15s ease;
+}
+
+.rdp-day_button:hover:not(:disabled) {
+  background: rgba(212, 175, 120, 0.18) !important;
+  color: var(--color-dark) !important;
+}
+
+.rdp-selected .rdp-day_button {
+  background: var(--color-primary) !important;
+  color: white !important;
+  box-shadow: 0 3px 10px rgba(212, 175, 120, 0.4);
+}
+
+.rdp-today .rdp-day_button {
+  font-weight: 700;
+  color: var(--color-primary) !important;
+  border: 1px solid rgba(212, 175, 120, 0.4) !important;
+}
+
+.rdp-disabled .rdp-day_button {
+  color: rgba(44, 44, 44, 0.2) !important;
+  cursor: not-allowed;
+}
+
+.rdp-outside .rdp-day_button {
+  color: rgba(44, 44, 44, 0.15) !important;
+}
+
+.rdp-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.rdp-month_grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 2px;
+}
