@@ -169,9 +169,19 @@ export default function BookingsCalendarPage() {
                     right: "dayGridMonth,timeGridWeek,timeGridDay",
                   }
             }
+            slotDuration="00:15:00"
+            slotLabelInterval="01:00:00"
+            scrollTime="08:00:00"
+            businessHours={{
+              daysOfWeek: [1, 2, 3, 4, 5, 6],
+              startTime: "09:00",
+              endTime: "20:00",
+            }}
             views={{
               listWeek: { buttonText: "Sedmica" },
               listMonth: { buttonText: "Mjesec" },
+              timeGridWeek: { buttonText: "Sedmica" },
+              timeGridDay: { buttonText: "Dan" },
             }}
             events={events}
             eventClick={(info) => {
