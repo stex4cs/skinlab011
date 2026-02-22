@@ -192,7 +192,7 @@ export default function BookingCalendar() {
 
         {/* ── STEP 1: Select treatment ── */}
         {step === 1 && (
-          <div className="max-w-2xl mx-auto">
+          <div style={{ maxWidth: "42rem", margin: "0 auto", width: "100%" }}>
             <p className="text-center text-sm mb-8" style={{ color: "rgba(44,44,44,0.5)", letterSpacing: "0.3px" }}>
               {t("calendar.selectTreatment")}
             </p>
@@ -283,7 +283,7 @@ export default function BookingCalendar() {
 
         {/* ── STEP 2: Select date ── */}
         {step === 2 && selectedTreatment && (
-          <div className="max-w-md mx-auto">
+          <div style={{ maxWidth: "28rem", margin: "0 auto", width: "100%" }}>
             {/* Selected treatment pill */}
             <div className="flex items-center justify-center gap-2 mb-6">
               <div className="flex items-center gap-2 px-4 py-2 rounded-full" style={{ background: `${selectedTreatment.categoryColor}30`, border: `1px solid ${selectedTreatment.categoryColor}` }}>
@@ -336,7 +336,7 @@ export default function BookingCalendar() {
 
         {/* ── STEP 3: Select time slot ── */}
         {step === 3 && selectedTreatment && selectedDate && (
-          <div className="max-w-md mx-auto">
+          <div style={{ maxWidth: "28rem", margin: "0 auto", width: "100%" }}>
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full" style={{ background: `${selectedTreatment.categoryColor}20`, border: `1px solid ${selectedTreatment.categoryColor}50` }}>
@@ -415,7 +415,7 @@ export default function BookingCalendar() {
 
         {/* ── STEP 4: Contact form ── */}
         {step === 4 && selectedTreatment && selectedDate && selectedTime && (
-          <div className="max-w-lg mx-auto">
+          <div style={{ maxWidth: "34rem", margin: "0 auto", width: "100%" }}>
             <p className="text-center text-sm mb-6" style={{ color: "rgba(44,44,44,0.5)" }}>
               {t("calendar.confirm")}
             </p>
