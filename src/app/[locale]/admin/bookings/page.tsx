@@ -53,10 +53,11 @@ function buildTimeOptions(): string[] {
 const TIME_OPTIONS = buildTimeOptions();
 
 const inputStyle = {
-  background: "rgba(255,255,255,0.05)",
+  background: "#1C1C28",
   border: "1px solid rgba(255,255,255,0.1)",
   color: TEXT,
   fontFamily: "inherit",
+  colorScheme: "dark",
 } as const;
 
 export default function BookingsCalendarPage() {
@@ -557,7 +558,7 @@ export default function BookingsCalendarPage() {
                   value={addForm.treatmentId}
                   onChange={(e) => setAddForm((f) => ({ ...f, treatmentId: e.target.value }))}
                   className="w-full rounded-lg px-3 py-2.5 text-sm outline-none"
-                  style={{ ...inputStyle, color: addForm.treatmentId ? TEXT : TEXT_MUTED }}
+                  style={{ ...inputStyle, color: addForm.treatmentId ? TEXT : TEXT_MUTED, colorScheme: "dark" }}
                 >
                   <option value="">— Izaberite tretman —</option>
                   {categories.map((cat) => (
