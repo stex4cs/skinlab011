@@ -5,11 +5,14 @@ import { SessionProvider } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import {
   LayoutDashboard,
   CalendarDays,
   DollarSign,
   LogOut,
+  Menu,
+  X,
 } from "lucide-react";
 
 const ADMIN_BG = "#111118";
@@ -21,6 +24,7 @@ function AdminContent({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
   const t = useTranslations("admin");
   const pathname = usePathname();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   if (status === "loading") {
     return (
@@ -38,11 +42,11 @@ function AdminContent({ children }: { children: React.ReactNode }) {
   if (!session) {
     return (
       <div
-        className="min-h-screen flex items-center justify-center"
+        className="min-h-screen flex items-center justify-center p-4"
         style={{ background: "linear-gradient(135deg, #1A1A26, #111118)" }}
       >
         <div
-          className="rounded-2xl p-10 text-center max-w-sm w-full mx-4"
+          className="rounded-2xl p-8 text-center max-w-sm w-full"
           style={{
             background: "#1C1C28",
             border: "1px solid rgba(212,175,120,0.2)",
@@ -96,97 +100,148 @@ function AdminContent({ children }: { children: React.ReactNode }) {
     { href: `/${locale}/admin/prices`, icon: DollarSign, label: t("prices") },
   ];
 
-  return (
-    <div className="min-h-screen flex" style={{ background: ADMIN_BG }}>
-      {/* Sidebar */}
-      <aside
-        className="w-64 flex flex-col min-h-screen"
-        style={{
-          background: SIDEBAR_BG,
-          borderRight: `1px solid ${SIDEBAR_BORDER}`,
-          boxShadow: "4px 0 24px rgba(0,0,0,0.3)",
-        }}
-      >
-        {/* Logo */}
-        <div className="p-6" style={{ borderBottom: `1px solid ${SIDEBAR_BORDER}` }}>
-          <div
-            className="font-heading text-xl"
-            style={{ color: GOLD, letterSpacing: "3px" }}
-          >
+  const SidebarContent = () => (
+    <>
+      {/* Logo */}
+      <div className="p-6 flex items-center justify-between" style={{ borderBottom: `1px solid ${SIDEBAR_BORDER}` }}>
+        <div>
+          <div className="font-heading text-xl" style={{ color: GOLD, letterSpacing: "3px" }}>
             SKINLAB 011
           </div>
-          <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.25)", letterSpacing: "2px" }}>
+          <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.25)", letterSpacing: "2px" }}>
             ADMIN PANEL
           </p>
         </div>
+        {/* Close button - mobile only */}
+        <button
+          className="md:hidden flex items-center justify-center w-8 h-8 rounded-lg border-none cursor-pointer"
+          style={{ background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.5)" }}
+          onClick={() => setSidebarOpen(false)}
+        >
+          <X size={16} />
+        </button>
+      </div>
 
-        {/* Nav */}
-        <nav className="flex-1 p-3 flex flex-col gap-1 mt-2">
-          {navItems.map(({ href, icon: Icon, label }) => {
-            const isActive = pathname === href;
-            return (
-              <Link
-                key={href}
-                href={href}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium no-underline transition-all"
-                style={
-                  isActive
-                    ? {
-                        background: "linear-gradient(135deg, rgba(212,175,120,0.2), rgba(212,175,120,0.1))",
-                        color: GOLD,
-                        border: "1px solid rgba(212,175,120,0.25)",
-                      }
-                    : {
-                        color: "rgba(255,255,255,0.5)",
-                        border: "1px solid transparent",
-                      }
+      {/* Nav */}
+      <nav className="flex-1 p-3 flex flex-col gap-1 mt-2">
+        {navItems.map(({ href, icon: Icon, label }) => {
+          const isActive = pathname === href;
+          return (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setSidebarOpen(false)}
+              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium no-underline transition-all"
+              style={
+                isActive
+                  ? {
+                      background: "linear-gradient(135deg, rgba(212,175,120,0.2), rgba(212,175,120,0.1))",
+                      color: GOLD,
+                      border: "1px solid rgba(212,175,120,0.25)",
+                    }
+                  : {
+                      color: "rgba(255,255,255,0.5)",
+                      border: "1px solid transparent",
+                    }
+              }
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
+                  (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.85)";
                 }
-                onMouseEnter={(e) => {
-                  if (!isActive) {
-                    (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
-                    (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.85)";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) {
-                    (e.currentTarget as HTMLElement).style.background = "transparent";
-                    (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)";
-                  }
-                }}
-              >
-                <Icon size={17} />
-                {label}
-              </Link>
-            );
-          })}
-        </nav>
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  (e.currentTarget as HTMLElement).style.background = "transparent";
+                  (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)";
+                }
+              }}
+            >
+              <Icon size={17} />
+              {label}
+            </Link>
+          );
+        })}
+      </nav>
 
-        {/* Footer */}
-        <div className="p-4" style={{ borderTop: `1px solid ${SIDEBAR_BORDER}` }}>
-          <p className="text-xs mb-3 px-2" style={{ color: "rgba(255,255,255,0.3)" }}>
-            {session.user?.email}
-          </p>
-          <button
-            onClick={() => signOut()}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all bg-transparent border-none cursor-pointer"
-            style={{ color: "rgba(255,255,255,0.4)" }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
-              (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.7)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.background = "transparent";
-              (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.4)";
-            }}
-          >
-            <LogOut size={17} />
-            {t("logout")}
-          </button>
-        </div>
+      {/* Footer */}
+      <div className="p-4" style={{ borderTop: `1px solid ${SIDEBAR_BORDER}` }}>
+        <p className="text-xs mb-3 px-2 truncate" style={{ color: "rgba(255,255,255,0.3)" }}>
+          {session.user?.email}
+        </p>
+        <button
+          onClick={() => signOut()}
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all bg-transparent border-none cursor-pointer"
+          style={{ color: "rgba(255,255,255,0.4)" }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
+            (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.7)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.background = "transparent";
+            (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.4)";
+          }}
+        >
+          <LogOut size={17} />
+          {t("logout")}
+        </button>
+      </div>
+    </>
+  );
+
+  return (
+    <div className="min-h-screen flex" style={{ background: ADMIN_BG }}>
+
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-30 md:hidden"
+          style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(2px)" }}
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar - desktop: static, mobile: fixed drawer */}
+      <aside
+        className="fixed md:static inset-y-0 left-0 z-40 w-64 flex flex-col min-h-screen overflow-y-auto"
+        style={{
+          background: SIDEBAR_BG,
+          borderRight: `1px solid ${SIDEBAR_BORDER}`,
+          boxShadow: sidebarOpen ? "8px 0 32px rgba(0,0,0,0.5)" : "4px 0 24px rgba(0,0,0,0.3)",
+          transform: sidebarOpen ? "translateX(0)" : "translateX(-100%)",
+          transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+        }}
+      >
+        <SidebarContent />
       </aside>
 
+      {/* Desktop sidebar spacer */}
+      <div className="hidden md:block w-64 flex-shrink-0" />
+
       {/* Main */}
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-auto min-w-0">
+
+        {/* Mobile top bar */}
+        <div
+          className="md:hidden sticky top-0 z-20 flex items-center gap-3 px-4 py-3"
+          style={{
+            background: SIDEBAR_BG,
+            borderBottom: `1px solid ${SIDEBAR_BORDER}`,
+            boxShadow: "0 2px 12px rgba(0,0,0,0.3)",
+          }}
+        >
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="flex items-center justify-center w-9 h-9 rounded-xl border-none cursor-pointer"
+            style={{ background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.7)" }}
+          >
+            <Menu size={18} />
+          </button>
+          <span className="font-heading text-base" style={{ color: GOLD, letterSpacing: "2px" }}>
+            SKINLAB 011
+          </span>
+        </div>
+
         {children}
       </main>
     </div>
