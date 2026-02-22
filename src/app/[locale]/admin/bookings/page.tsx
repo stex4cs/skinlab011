@@ -161,7 +161,7 @@ export default function BookingsCalendarPage() {
                 ? {
                     left: "prev,next",
                     center: "title",
-                    right: "listWeek,listMonth",
+                    right: "listDay,listWeek,listMonth",
                   }
                 : {
                     left: "prev,next today",
@@ -178,6 +178,7 @@ export default function BookingsCalendarPage() {
               endTime: "20:00",
             }}
             views={{
+              listDay: { buttonText: "Dan" },
               listWeek: { buttonText: "Sedmica" },
               listMonth: { buttonText: "Mjesec" },
               timeGridWeek: { buttonText: "Sedmica" },
