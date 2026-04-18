@@ -46,17 +46,19 @@ export default async function BlogPostPage({ params }: Props) {
             }}
           />
           <div className="absolute inset-0 flex flex-col justify-end">
-            <div className="container pb-12">
-              <Link
-                href="/blog"
-                className="no-underline inline-flex items-center gap-1.5 text-sm mb-6 transition-opacity hover:opacity-80"
-                style={{ color: "rgba(255,255,255,0.75)" }}
-              >
-                <ChevronLeft size={14} />
-                {backLabel}
-              </Link>
+            <div className="container pb-12 text-center">
+              <div className="flex justify-center mb-6">
+                <Link
+                  href="/blog"
+                  className="no-underline inline-flex items-center gap-1.5 text-sm transition-opacity hover:opacity-80"
+                  style={{ color: "rgba(255,255,255,0.75)" }}
+                >
+                  <ChevronLeft size={14} />
+                  {backLabel}
+                </Link>
+              </div>
               <h1
-                className="font-heading font-bold text-white leading-tight"
+                className="font-heading font-bold text-white leading-tight mx-auto"
                 style={{ fontSize: "clamp(1.6rem, 4vw, 2.5rem)", maxWidth: "800px" }}
               >
                 {data.title}
@@ -67,37 +69,31 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Article */}
         <div className="container py-16">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto text-center">
             {/* Author + date */}
             <div
-              className="flex items-center gap-4 pb-8 mb-10"
+              className="flex flex-col items-center gap-3 pb-8 mb-10"
               style={{ borderBottom: "1px solid rgba(212,175,120,0.2)" }}
             >
-              <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+              <div className="relative w-14 h-14 rounded-full overflow-hidden">
                 <Image
                   src={post.author.image}
                   alt={post.author.name}
                   fill
                   className="object-cover"
-                  sizes="48px"
+                  sizes="56px"
                 />
               </div>
               <div>
-                <div
-                  className="font-semibold text-sm"
-                  style={{ color: "var(--color-dark)" }}
-                >
+                <div className="font-semibold text-sm" style={{ color: "var(--color-dark)" }}>
                   {post.author.name}
                 </div>
-                <div
-                  className="text-xs"
-                  style={{ color: "rgba(44,44,44,0.5)" }}
-                >
+                <div className="text-xs" style={{ color: "rgba(44,44,44,0.5)" }}>
                   {authorTitle}
                 </div>
               </div>
               <div
-                className="ml-auto flex items-center gap-1.5 text-xs"
+                className="flex items-center gap-1.5 text-xs"
                 style={{ color: "rgba(44,44,44,0.45)" }}
               >
                 <Calendar size={12} />
