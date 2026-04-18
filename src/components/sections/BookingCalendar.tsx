@@ -198,7 +198,7 @@ export default function BookingCalendar() {
             <p className="text-center text-sm mb-8" style={{ color: "rgba(44,44,44,0.5)", letterSpacing: "0.3px" }}>
               {t("calendar.selectTreatment")}
             </p>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {categories.map((cat) => {
                 const isOpen = openCategory === cat.id;
                 return (
@@ -207,47 +207,48 @@ export default function BookingCalendar() {
                     className="rounded-2xl overflow-hidden"
                     style={{
                       background: "white",
-                      border: isOpen ? `1px solid ${cat.color}` : "1px solid rgba(212,175,120,0.12)",
-                      boxShadow: isOpen ? `0 4px 24px ${cat.color}30` : "0 1px 8px rgba(212,175,120,0.06)",
+                      border: isOpen ? `1.5px solid ${cat.color}` : "1px solid rgba(212,175,120,0.15)",
+                      boxShadow: isOpen ? `0 6px 32px ${cat.color}25` : "0 2px 12px rgba(212,175,120,0.07)",
                       transition: "all 0.2s ease",
                     }}
                   >
                     {/* Category header */}
                     <button
                       onClick={() => setOpenCategory(isOpen ? null : cat.id)}
-                      className="w-full flex items-center justify-between px-5 py-4 bg-transparent border-none cursor-pointer text-left"
+                      className="w-full flex items-center justify-between px-6 py-5 bg-transparent border-none cursor-pointer text-left"
                     >
                       <div className="flex items-center gap-3">
                         <div
-                          className="w-4 h-4 rounded-full flex-shrink-0"
+                          className="w-5 h-5 rounded-full flex-shrink-0"
                           style={{
                             backgroundColor: cat.color,
-                            boxShadow: `0 0 0 3px ${cat.color}30`,
+                            boxShadow: `0 0 0 4px ${cat.color}25`,
                           }}
                         />
                         <span
                           className="font-heading font-semibold"
-                          style={{ color: "var(--color-dark)", fontSize: "0.92rem", letterSpacing: "0.3px" }}
+                          style={{ color: "var(--color-dark)", fontSize: "1rem", letterSpacing: "0.3px" }}
                         >
                           {getLocalizedName(cat, locale)}
                         </span>
-                        <span style={{ fontSize: "0.72rem", color: "rgba(44,44,44,0.35)", background: "rgba(44,44,44,0.05)", padding: "2px 8px", borderRadius: "999px" }}>
+                        <span style={{ fontSize: "0.75rem", color: "rgba(44,44,44,0.4)", background: "rgba(44,44,44,0.06)", padding: "3px 10px", borderRadius: "999px" }}>
                           {cat.treatments.length}
                         </span>
                       </div>
                       <ChevronDown
-                        size={16}
+                        size={18}
                         style={{
-                          color: isOpen ? "var(--color-primary)" : "rgba(44,44,44,0.3)",
+                          color: isOpen ? "var(--color-primary)" : "rgba(44,44,44,0.35)",
                           transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
                           transition: "transform 0.2s ease",
+                          flexShrink: 0,
                         }}
                       />
                     </button>
 
                     {/* Treatment list */}
                     {isOpen && (
-                      <div style={{ borderTop: `1px solid ${cat.color}30` }}>
+                      <div style={{ borderTop: `1.5px solid ${cat.color}25` }}>
                         {cat.treatments.map((tr, i) => (
                           <button
                             key={tr.id}
@@ -255,21 +256,21 @@ export default function BookingCalendar() {
                               setSelectedTreatment({ id: tr.id, name: getLocalizedName(tr, locale), price: tr.price, categoryColor: cat.color, duration: tr.duration_minutes || 60 });
                               setStep(2);
                             }}
-                            className="w-full flex items-center justify-between px-5 py-3.5 bg-transparent border-none cursor-pointer text-left group"
+                            className="w-full flex items-center justify-between px-6 py-4 bg-transparent border-none cursor-pointer text-left group"
                             style={{
-                              borderTop: i > 0 ? `1px solid rgba(44,44,44,0.04)` : "none",
+                              borderTop: i > 0 ? `1px solid rgba(44,44,44,0.05)` : "none",
                               transition: "background 0.15s ease",
                             }}
-                            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = `${cat.color}20`; }}
+                            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = `${cat.color}18`; }}
                             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
                           >
                             <div className="flex items-center gap-3">
-                              <div className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: cat.color, opacity: 0.6 }} />
-                              <span style={{ fontSize: "0.87rem", color: "var(--color-dark)", lineHeight: 1.4 }}>
+                              <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: cat.color, opacity: 0.7 }} />
+                              <span style={{ fontSize: "0.93rem", color: "var(--color-dark)", lineHeight: 1.5 }}>
                                 {getLocalizedName(tr, locale)}
                               </span>
                             </div>
-                            <span className="flex-shrink-0 ml-4 font-semibold" style={{ fontSize: "0.87rem", color: "var(--color-primary)" }}>
+                            <span className="flex-shrink-0 ml-4 font-semibold" style={{ fontSize: "0.93rem", color: "var(--color-primary)" }}>
                               {tr.price}
                             </span>
                           </button>
