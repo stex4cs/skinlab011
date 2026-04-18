@@ -46,7 +46,7 @@ export default async function BlogPostPage({ params }: Props) {
             }}
           />
           <div className="absolute inset-0 flex flex-col justify-end">
-            <div className="container pb-12 text-center">
+            <div className="pb-12" style={{ textAlign: "center" }}>
               <div className="flex justify-center mb-6">
                 <Link
                   href="/blog"
@@ -58,8 +58,8 @@ export default async function BlogPostPage({ params }: Props) {
                 </Link>
               </div>
               <h1
-                className="font-heading font-bold text-white leading-tight mx-auto"
-                style={{ fontSize: "clamp(1.6rem, 4vw, 2.5rem)", maxWidth: "800px" }}
+                className="font-heading font-bold text-white leading-tight"
+                style={{ fontSize: "clamp(1.6rem, 4vw, 2.5rem)", maxWidth: "680px", margin: "0 auto", padding: "0 1.5rem" }}
               >
                 {data.title}
               </h1>
