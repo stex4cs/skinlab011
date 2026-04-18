@@ -21,8 +21,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "proljetna-njega-koze",
     publishedAt: "2026-04-18",
-    coverImage:
-      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200&q=80",
+    coverImage: "/images/blog/blog-proljetna-njega-1.jpg",
     author: {
       name: "Neda Vukobrat",
       image: "/images/neda.png",
@@ -43,7 +42,7 @@ export const blogPosts: BlogPost[] = [
         },
         {
           type: "image",
-          src: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=900&q=80",
+          src: "/images/blog/blog-proljetna-njega-1.jpg",
           alt: "Kozmetički preparati za proljetnu njegu kože",
           caption: "Pravi preparati čine razliku u proljetnoj rutini njege",
         },
@@ -73,7 +72,7 @@ export const blogPosts: BlogPost[] = [
         },
         {
           type: "image",
-          src: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=900&q=80",
+          src: "/images/blog/blog-proljetna-njega-2.jpg",
           alt: "Profesionalni tretman lica u SkinLab 011",
           caption: "Profesionalni tretman stimuliše obnovu i sjaj kože",
         },
@@ -110,7 +109,7 @@ export const blogPosts: BlogPost[] = [
         },
         {
           type: "image",
-          src: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=900&q=80",
+          src: "/images/blog/blog-proljetna-njega-1.jpg",
           alt: "Skincare products for spring routine",
           caption: "The right products make all the difference in your spring routine",
         },
@@ -140,7 +139,7 @@ export const blogPosts: BlogPost[] = [
         },
         {
           type: "image",
-          src: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=900&q=80",
+          src: "/images/blog/blog-proljetna-njega-2.jpg",
           alt: "Professional facial treatment at SkinLab 011",
           caption: "A professional treatment stimulates skin renewal and radiance",
         },
@@ -177,7 +176,7 @@ export const blogPosts: BlogPost[] = [
         },
         {
           type: "image",
-          src: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=900&q=80",
+          src: "/images/blog/blog-proljetna-njega-1.jpg",
           alt: "Косметические средства для весеннего ухода",
           caption: "Правильные средства — основа вашего весеннего ухода",
         },
@@ -207,7 +206,7 @@ export const blogPosts: BlogPost[] = [
         },
         {
           type: "image",
-          src: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=900&q=80",
+          src: "/images/blog/blog-proljetna-njega-2.jpg",
           alt: "Профессиональная процедура для лица в SkinLab 011",
           caption: "Профессиональная процедура стимулирует обновление и сияние кожи",
         },
