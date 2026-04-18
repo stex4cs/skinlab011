@@ -25,8 +25,7 @@ export const blogPosts: BlogPost[] = [
       "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200&q=80",
     author: {
       name: "Neda Vukobrat",
-      image:
-        "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=200&q=80",
+      image: "/images/neda.png",
       title: {
         me: "Osnivač i vlasnica",
         en: "Founder & Owner",
