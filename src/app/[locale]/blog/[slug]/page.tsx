@@ -68,8 +68,8 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {/* Article */}
-        <div className="container py-16">
-          <div className="max-w-2xl mx-auto text-center">
+        <div className="py-16">
+          <div style={{ maxWidth: "680px", margin: "0 auto", padding: "0 1.5rem", textAlign: "center" }}>
             {/* Author + date */}
             <div
               className="flex flex-col items-center gap-3 pb-8 mb-10"
