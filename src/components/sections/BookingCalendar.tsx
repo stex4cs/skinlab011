@@ -385,21 +385,32 @@ export default function BookingCalendar() {
                     {availability?.slots.map((slot) => {
                       const isBooked = availability.bookedSlots.includes(slot);
                       const isSelected = selectedTime === slot;
+                      const isPast = (() => {
+                        if (!selectedDate) return false;
+                        const now = new Date();
+                        const isToday = selectedDate.toDateString() === now.toDateString();
+                        if (!isToday) return false;
+                        const [h, m] = slot.split(":").map(Number);
+                        return h * 60 + m <= now.getHours() * 60 + now.getMinutes();
+                      })();
+                      const isDisabled = isBooked || isPast;
                       return (
                         <button
                           key={slot}
-                          disabled={isBooked}
+                          disabled={isDisabled}
                           onClick={() => { setSelectedTime(slot); setStep(4); }}
                           className="py-3 rounded-xl text-sm font-semibold border-none transition-all"
                           style={
-                            isBooked
+                            isPast
+                              ? { background: "rgba(44,44,44,0.04)", color: "rgba(44,44,44,0.22)", border: "1px solid rgba(44,44,44,0.08)", cursor: "not-allowed" }
+                              : isBooked
                               ? { background: "rgba(239,83,80,0.05)", color: "rgba(239,83,80,0.4)", border: "1px solid rgba(239,83,80,0.15)", cursor: "not-allowed", textDecoration: "line-through" }
                               : isSelected
                               ? { background: "var(--color-primary)", color: "white", border: "1px solid var(--color-primary)", boxShadow: "0 4px 14px rgba(212,175,120,0.4)", cursor: "pointer" }
                               : { background: "rgba(212,175,120,0.07)", color: "var(--color-dark)", border: "1px solid rgba(212,175,120,0.2)", cursor: "pointer" }
                           }
-                          onMouseEnter={(e) => { if (!isBooked && !isSelected) { (e.currentTarget as HTMLElement).style.background = "rgba(212,175,120,0.16)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(212,175,120,0.5)"; } }}
-                          onMouseLeave={(e) => { if (!isBooked && !isSelected) { (e.currentTarget as HTMLElement).style.background = "rgba(212,175,120,0.07)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(212,175,120,0.2)"; } }}
+                          onMouseEnter={(e) => { if (!isDisabled && !isSelected) { (e.currentTarget as HTMLElement).style.background = "rgba(212,175,120,0.16)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(212,175,120,0.5)"; } }}
+                          onMouseLeave={(e) => { if (!isDisabled && !isSelected) { (e.currentTarget as HTMLElement).style.background = "rgba(212,175,120,0.07)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(212,175,120,0.2)"; } }}
                         >
                           {slot}
                         </button>
