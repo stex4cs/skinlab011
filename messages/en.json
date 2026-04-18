@@ -7,7 +7,8 @@
     "faq": "FAQ",
     "contact": "Contact",
     "gallery": "Gallery",
-    "about": "About Us"
+    "about": "About Us",
+    "blog": "Blog"
   },
   "hero": {
     "title": "SKINLAB 011",
@@ -210,6 +211,12 @@
       "addTreatment": "Add Treatment",
       "saved": "Changes saved!"
     }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Tips, trends and expert opinions on skincare",
+    "readMore": "Read more",
+    "allPosts": "View all posts"
   },
   "common": {
     "loading": "Loading...",

@@ -6,11 +6,14 @@ import { Link } from "@/i18n/navigation";
 import LangSwitcher from "./LangSwitcher";
 import MobileMenu from "./MobileMenu";
 import { Menu } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const t = useTranslations("nav");
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const isBlogPage = pathname.includes("/blog");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 100);
@@ -44,16 +47,23 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <div className="flex gap-6">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="nav-link"
-                >
-                  {link.label}
-                </a>
-              ))}
+            <div className="flex gap-6 items-center">
+              {isBlogPage ? (
+                <Link href="/" className="nav-link">{t("home")}</Link>
+              ) : (
+                navLinks.map((link) => (
+                  <a key={link.href} href={link.href} className="nav-link">
+                    {link.label}
+                  </a>
+                ))
+              )}
+              <Link
+                href="/blog"
+                className="nav-link"
+                style={isBlogPage ? { color: "var(--color-primary)", fontWeight: 600 } : {}}
+              >
+                {t("blog")}
+              </Link>
             </div>
             <LangSwitcher />
           </div>

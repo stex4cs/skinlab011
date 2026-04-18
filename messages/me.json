@@ -7,7 +7,8 @@
     "faq": "FAQ",
     "contact": "Kontakt",
     "gallery": "Galerija",
-    "about": "O nama"
+    "about": "O nama",
+    "blog": "Blog"
   },
   "hero": {
     "title": "SKINLAB 011",
@@ -210,6 +211,12 @@
       "addTreatment": "Dodaj tretman",
       "saved": "Promjene sačuvane!"
     }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Savjeti, trendovi i stručna mišljenja o njezi kože",
+    "readMore": "Pročitajte više",
+    "allPosts": "Pogledajte sve objave"
   },
   "common": {
     "loading": "Učitavanje...",

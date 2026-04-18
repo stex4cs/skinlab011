@@ -10,6 +10,7 @@ import Gallery from "@/components/sections/Gallery";
 import BookingCalendar from "@/components/sections/BookingCalendar";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
+import Blog from "@/components/sections/Blog";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
         <Pricing />
         <Testimonials />
         <Gallery />
+        <Blog />
         <BookingCalendar />
         <FAQ />
         <Contact />
