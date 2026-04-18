@@ -106,7 +106,7 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
 
             {/* Content blocks */}
-            <div className="space-y-6">
+            <div className="space-y-6 text-center">
               {data.content.map((block, i) => {
                 if (block.type === "paragraph") {
                   return (
